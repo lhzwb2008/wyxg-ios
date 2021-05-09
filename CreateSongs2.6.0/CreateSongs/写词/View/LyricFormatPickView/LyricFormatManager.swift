@@ -15,18 +15,18 @@ import UIKit
  */
 class lyricFormatManager: NSObject {
     
-    var selectedIndex: NSInteger = 999
-    var plistPath: String = ""
-    var selectedView: SelectedView
-    var tucaoArray: NSArray = []
-    var zhufuArray: NSArray = []
-    var weimeiArray: NSArray = []
-    var biaobaiArray: NSArray = []
+    @objc var selectedIndex: NSInteger = 999
+    @objc var plistPath: String = ""
+    @objc var selectedView: SelectedView
+    @objc var tucaoArray: NSArray = []
+    @objc var zhufuArray: NSArray = []
+    @objc var weimeiArray: NSArray = []
+    @objc var biaobaiArray: NSArray = []
     
     var selectedViewFrame: CGRect
     var lyricFormatView: LYricFormatSeletView
     
-    init(controllerView: XieciViewController, selectFrame: CGRect, tucaoArray: NSArray, zhufuArray: NSArray, weimeiArray: NSArray, biaobaiArray: NSArray) {
+    @objc init(controllerView: XieciViewController, selectFrame: CGRect, tucaoArray: NSArray, zhufuArray: NSArray, weimeiArray: NSArray, biaobaiArray: NSArray) {
         self.plistPath = Bundle.main.path(forResource: "LyricFormat", ofType: "plist")!
         let lyricDic: NSMutableDictionary = NSMutableDictionary(contentsOfFile: self.plistPath)!
         
@@ -70,7 +70,7 @@ class lyricFormatManager: NSObject {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "selectedLyricFormat"), object: nil)
     }
     
-    func didSelected(_ selectIndex: NSInteger) {
+    @objc func didSelected(_ selectIndex: NSInteger) {
         
         if self.selectedIndex == selectIndex {
             self.didTap()
@@ -79,7 +79,7 @@ class lyricFormatManager: NSObject {
         self.showSelectView(selectIndex)
     }
     
-    func didTap() {
+    @objc func didTap() {
         self.selectedIndex = 999
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.lyricFormatView.seletTableView.frame = CGRect(x: self.lyricFormatView.seletTableView.frame.origin.x, y: self.lyricFormatView.seletTableView.frame.origin.y, width: self.lyricFormatView.seletTableView.bounds.size.width, height: 0)
@@ -90,7 +90,7 @@ class lyricFormatManager: NSObject {
         }) 
     }
     
-    func tableViewScrollToTop(_ animated: Bool) {
+    @objc func tableViewScrollToTop(_ animated: Bool) {
         
         let delay = 0.1 * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
@@ -101,7 +101,7 @@ class lyricFormatManager: NSObject {
         })
     }
     
-    func showSelectView(_ index: NSInteger) {
+    @objc func showSelectView(_ index: NSInteger) {
         if index == 0 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "selectedBlack"), object: nil)
             self.didTap()

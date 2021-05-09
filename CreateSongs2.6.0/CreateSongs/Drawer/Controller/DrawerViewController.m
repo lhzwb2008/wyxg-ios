@@ -124,7 +124,7 @@
 // 回到首页最新
 - (void)turnToHomeNew {
     
-     KYDrawerController *kyDrawer = self.kyDrawer;
+    KYDrawerController *kyDrawer = self.kyDrawer;
     
     HomeViewController *mainHomeVC = [[HomeViewController alloc] init];
     CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];

@@ -197,7 +197,7 @@ class SelectedView: UIView {
         self.bgScrollView.contentSize = CGSize(width: btnWidth * CGFloat(Float(5)), height: 0)
     }
     
-    func selectBtnClick(_ sender: UITapGestureRecognizer) {
+    @objc func selectBtnClick(_ sender: UITapGestureRecognizer) {
         //if (self.myFunc != nil) {
             //let senderBtn: UIButton = sender.view as! UIButton
             //self.myFunc(senderBtn.tag)

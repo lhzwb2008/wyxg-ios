@@ -489,6 +489,7 @@
 #define kScaleFrom_iPhone6_Desgin(_X_) (_X_ * (kScreen_Width/375))
 #define kScreen_Height [UIScreen mainScreen].bounds.size.height
 #define kScreen_Width [UIScreen mainScreen].bounds.size.width
+
 #define kKeyWindow [UIApplication sharedApplication].keyWindow
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 #define kDevice_Is_iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)

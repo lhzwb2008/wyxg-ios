@@ -232,6 +232,7 @@
 - (void)backButtonAction {
     KYDrawerController *drawerVC = (KYDrawerController *)self.navigationController.parentViewController;
     
+//    [drawerVC setDrawerSegueIdentifier:@""];
     [drawerVC setDrawerState:DrawerStateOpened animated:YES];
 }
 

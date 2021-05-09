@@ -36,6 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    LYricFormatSeletView *seletView;
+    
     [self changeSongToEmpty];
 
     self.willPopAlert = YES;

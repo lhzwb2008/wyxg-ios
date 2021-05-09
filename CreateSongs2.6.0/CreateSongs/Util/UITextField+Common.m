@@ -20,7 +20,7 @@
     
     const NSInteger location = [self offsetFromPosition:beginning toPosition:selectionStart];
     const NSInteger length = [self offsetFromPosition:selectionStart toPosition:selectionEnd];
-    
+    ////http://139.129.131.20:8080/mosque/search
     return NSMakeRange(location, length);
 }
 
