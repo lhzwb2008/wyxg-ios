@@ -167,7 +167,8 @@
 
 // 创建歌词界面
 - (void)createLyricView {
-    self.tianCiMainView = [[TianciMainView alloc] initWithFrame:CGRectMake(0, 64 + 25 * HEIGHT_NIT, self.view.width, self.view.height - self.navView.height - 25 * HEIGHT_NIT - 50 * WIDTH_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.tianCiMainView = [[TianciMainView alloc] initWithFrame:CGRectMake(0, navH + 25 * HEIGHT_NIT, self.view.width, self.view.height - self.navView.height - 25 * HEIGHT_NIT - 50 * WIDTH_NIT)];
     self.tianCiMainView.backgroundColor = [UIColor clearColor];
     WEAK_SELF;
     self.tianCiMainView.lyTextArray = self.lyricFormatArray;

@@ -114,9 +114,9 @@
 - (void)initView {
     
     // 私信和评论图标互换
-    
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
     TotalMsgButton *sixinButton = [TotalMsgButton buttonWithType:UIButtonTypeCustom];
-    sixinButton.frame = CGRectMake(0, 64 + 15 * WIDTH_NIT, self.view.width, 55 * WIDTH_NIT);
+    sixinButton.frame = CGRectMake(0, navH + 15 * WIDTH_NIT, self.view.width, 55 * WIDTH_NIT);
     [sixinButton setImage:[UIImage imageNamed:@"站内信_评论"] forState:UIControlStateNormal];
     [sixinButton setTitle:@"私信" forState:UIControlStateNormal];
     sixinButton.tag = 104;

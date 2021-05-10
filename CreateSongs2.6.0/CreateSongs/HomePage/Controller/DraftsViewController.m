@@ -414,8 +414,8 @@ static NSString *const thirdIdentifier = @"thirdIdentifier";
 }
 
 - (void)createNoDataView {
-    
-    self.noDataImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 105 * HEIGHT_NIT + 50 * WIDTH_NIT, 168.5 * WIDTH_NIT, 216 * WIDTH_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.noDataImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, navH + 105 * HEIGHT_NIT + 50 * WIDTH_NIT, 168.5 * WIDTH_NIT, 216 * WIDTH_NIT)];
     self.noDataImage.center = CGPointMake(self.view.width / 2, self.noDataImage.centerY);
     self.noDataImage.image = [UIImage imageNamed:@"草稿空状态"];
     [self.scrollView addSubview:self.noDataImage];
@@ -430,7 +430,7 @@ static NSString *const thirdIdentifier = @"thirdIdentifier";
     self.noDataLabel.hidden = YES;
     self.lineView.hidden = NO;
     
-    self.noDataImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 105 * HEIGHT_NIT + 50 * WIDTH_NIT, 168.5 * WIDTH_NIT, 216 * WIDTH_NIT)];
+    self.noDataImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, navH + 105 * HEIGHT_NIT + 50 * WIDTH_NIT, 168.5 * WIDTH_NIT, 216 * WIDTH_NIT)];
     self.noDataImage2.center = CGPointMake(self.view.width / 2 + self.view.width, self.noDataImage2.centerY);
     self.noDataImage2.image = [UIImage imageNamed:@"草稿空状态"];
     [self.scrollView addSubview:self.noDataImage2];
@@ -445,9 +445,7 @@ static NSString *const thirdIdentifier = @"thirdIdentifier";
     self.noDataLabel2.hidden = YES;
     self.lineView2.hidden = NO;
     
-    
-    
-    self.noDataImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 105 * HEIGHT_NIT + 50 * WIDTH_NIT, 168.5 * WIDTH_NIT, 216 * WIDTH_NIT)];
+    self.noDataImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, navH + 105 * HEIGHT_NIT + 50 * WIDTH_NIT, 168.5 * WIDTH_NIT, 216 * WIDTH_NIT)];
     self.noDataImage3.center = CGPointMake(self.view.width / 2 + self.view.width * 2, self.noDataImage2.centerY);
     self.noDataImage3.image = [UIImage imageNamed:@"草稿空状态"];
     [self.scrollView addSubview:self.noDataImage3];

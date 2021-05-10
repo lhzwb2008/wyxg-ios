@@ -87,6 +87,9 @@ static PlayViewController *sharePlayVC = nil;
     } else {
         naviHeight = TY_NAVI_HEIGHT;
     }
+    if (kDevice_Is_iPhoneX) {
+        naviHeight = 88;
+    }
     
     _tyView = [[TYView alloc] initWithFrame:CGRectMake(0, naviHeight, width(self.view), height(self.view)-naviHeight)];
 //    _tyView.backgroundColor = [UIColor clearColor];
@@ -1136,6 +1139,9 @@ static PlayViewController *sharePlayVC = nil;
         naviHeight = TY_NAVI_HEIGHT_4s;
     } else {
         naviHeight = TY_NAVI_HEIGHT;
+    }
+    if (kDevice_Is_iPhoneX) {
+        naviHeight = 88;
     }
     customNavie.frame = CGRectMake(0, 0, width(self.view), naviHeight);
     customNavie.backgroundColor = TY_NAVI_BGCOLOR;

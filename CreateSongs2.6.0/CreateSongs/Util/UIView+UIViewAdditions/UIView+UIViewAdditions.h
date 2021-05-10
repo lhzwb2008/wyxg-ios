@@ -11,6 +11,7 @@
 
 @interface UIView (UIViewAdditions)
 
++ (BOOL)bottomIsFullScreen;
 /**
  * Shortcut for frame.origin.x.
  *

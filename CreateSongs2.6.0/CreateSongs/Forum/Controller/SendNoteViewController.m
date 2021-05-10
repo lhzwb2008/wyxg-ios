@@ -130,8 +130,8 @@
 
 // 输入框
 - (void)createTextView {
-    
-    self.contentText = [[UITextView alloc] initWithFrame:CGRectMake(16 * WIDTH_NIT, 64 + 20 * WIDTH_NIT, self.view.width - 32 * WIDTH_NIT, self.view.height - 64 - 20*WIDTH_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.contentText = [[UITextView alloc] initWithFrame:CGRectMake(16 * WIDTH_NIT, navH + 20 * WIDTH_NIT, self.view.width - 32 * WIDTH_NIT, self.view.height - navH - 20*WIDTH_NIT)];
     [self.view addSubview:self.contentText];
     self.contentText.backgroundColor = [UIColor clearColor];
     self.contentText.textColor = [UIColor colorWithHexString:@"#535353"];

@@ -119,7 +119,8 @@
 
 // 上传成功图标
 - (void)createUploadSuccess {
-    UIImageView *succussImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 65 * HEIGHT_NIT, 150 * WIDTH_NIT, 150 * WIDTH_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    UIImageView *succussImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, navH + 65 * HEIGHT_NIT, 150 * WIDTH_NIT, 150 * WIDTH_NIT)];
     [self.view addSubview:succussImage];
     succussImage.center = CGPointMake(self.view.width / 2, succussImage.centerY);
     succussImage.image = [UIImage imageNamed:@"分享成功"];

@@ -77,8 +77,8 @@
     
     /************************** blockView1 *****************************/
     
-    
-    self.blockView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 64 + 35 * HEIGHT_NIT, self.width, 148 * HEIGHT_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.blockView1 = [[UIView alloc] initWithFrame:CGRectMake(0, navH + 35 * HEIGHT_NIT, self.width, 148 * HEIGHT_NIT)];
     [self addSubview:self.blockView1];
     self.blockView1.backgroundColor = [UIColor whiteColor];
 //    self.blockView1.layer.shadowOpacity = 0.3;

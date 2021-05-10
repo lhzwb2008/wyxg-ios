@@ -257,8 +257,8 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
+    ((UIView *)[pickerView.subviews objectAtIndex:0]).backgroundColor = [UIColor clearColor];
     ((UIView *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor clearColor];
-    ((UIView *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor clearColor];
     
     NSArray *moodArray = @[@"高兴icon", @"悲伤icon"];
     NSArray *songType = @[@"流行icon", @"摇滚icon", @"民谣icon", @"电子icon"];

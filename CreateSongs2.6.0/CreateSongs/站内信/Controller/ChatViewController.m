@@ -109,7 +109,8 @@
     if (self.pingbiImage.superview == self.view) {
         [self.pingbiImage removeFromSuperview];
     } else {
-        self.pingbiImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - 80 * WIDTH_NIT - 16 * WIDTH_NIT, 64 + 5 * WIDTH_NIT, 80 * WIDTH_NIT, 34 * WIDTH_NIT)];
+        CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+        self.pingbiImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - 80 * WIDTH_NIT - 16 * WIDTH_NIT, navH + 5 * WIDTH_NIT, 80 * WIDTH_NIT, 34 * WIDTH_NIT)];
         [self.view addSubview:self.pingbiImage];
         self.pingbiImage.image = [UIImage imageNamed:@"屏蔽_弹窗"];
         

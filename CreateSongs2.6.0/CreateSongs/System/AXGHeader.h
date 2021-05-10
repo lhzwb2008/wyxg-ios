@@ -478,6 +478,7 @@
 [View.layer setShadowRadius:(Radius)];\
 [View.layer setShadowOpacity:(Opacity)]
 
+#define kDevice_Is_iPhoneX [UIView bottomIsFullScreen]
 /**
  *  运行时间
  */

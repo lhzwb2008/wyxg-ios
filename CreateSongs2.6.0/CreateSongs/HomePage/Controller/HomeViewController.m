@@ -238,6 +238,7 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
 //    [self gettouxiang];
     
     [self.view bringSubviewToFront:self.navView];
+    [self.view bringSubviewToFront:self.navFakeView];
     
     [self createBottomButton];
     [self createEdgePanView];
@@ -347,8 +348,8 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
     
     self.centerX1 = self.recommandLabel.centerX;
     self.centerX2 = self.latestLabel.centerX;
-    
-    self.titleSlider = [[UIView alloc] initWithFrame:CGRectMake(0, 64 - 2, width, 2)];
+
+    self.titleSlider = [[UIView alloc] initWithFrame:CGRectMake(0, self.navView.height - 2, width, 2)];
     [self.navView addSubview:self.titleSlider];
     self.titleSlider.center = CGPointMake(self.recommandLabel.centerX, self.titleSlider.centerY);
     self.titleSlider.backgroundColor = HexStringColor(@"#441D11");

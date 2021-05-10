@@ -27,8 +27,8 @@
 - (void)createAboutUsView {
     
     self.backgroundColor = [UIColor whiteColor];
-    
-    UIImageView *logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + 185 * HEIGHT_NIT, 153 * WIDTH_NIT, 66.5 * WIDTH_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    UIImageView *logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, navH + 185 * HEIGHT_NIT, 153 * WIDTH_NIT, 66.5 * WIDTH_NIT)];
     logoImage.image = [UIImage imageNamed:@"设置_关于我们"];
     logoImage.center = CGPointMake(self.centerX, logoImage.centerY);
     logoImage.contentMode = UIViewContentModeScaleAspectFit;
