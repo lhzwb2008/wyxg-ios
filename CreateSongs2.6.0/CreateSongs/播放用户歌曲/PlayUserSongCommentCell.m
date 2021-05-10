@@ -139,7 +139,7 @@ static NSString *const indentifier = @"mainTableViewCellIdentifier";
         self.isUped = NO;
         [self.upBtn setImage:[UIImage imageNamed:@"playUser点赞"] forState:UIControlStateNormal];
     }
-    //http://service.woyaoxiege.com/core/home/data/upComment?Comments=21548
+    //http://1.117.109.129/core/home/data/upComment?Comments=21548
     // id 21548
     
     NSInteger upC = [_userFrameModel.commentModel.up_count integerValue];

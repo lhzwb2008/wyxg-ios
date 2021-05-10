@@ -15,6 +15,9 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+        navH = 44 - 20;
+        self.frame = CGRectMake(0, navH, SCREEN_W, SCREEN_H - navH);
         [self createView];
     }
     return self;

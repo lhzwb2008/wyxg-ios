@@ -2003,8 +2003,8 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
 // 推到用户歌曲界面
 - (void)pushToUserSongVC:(id)cell {
     
-//    self.lyricURL = @"http://service.woyaoxiege.com/music/lrc/f5a13eca90cbe22dd8a3c412e941e61e_6.lrc";
-//    self.soundURL = @"http://service.woyaoxiege.com/music/mp3/f5a13eca90cbe22dd8a3c412e941e61e_6.mp3";
+//    self.lyricURL = @"http://1.117.109.129/core/music/lrc/f5a13eca90cbe22dd8a3c412e941e61e_6.lrc";
+//    self.soundURL = @"http://1.117.109.129/core/music/mp3/f5a13eca90cbe22dd8a3c412e941e61e_6.mp3";
 //    self.soundName = @"七夕";
 //    self.listenCount = 1234;
 //    self.user_id = @"20590";

@@ -553,12 +553,13 @@
 //}
 - (void)createNavView {
     
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, navH)];
     self.bottomView.alpha = 0.0f;
     self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#FFDC74"];
     [self.view addSubview:self.bottomView];
     
-    UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, navH)];
     [self.view addSubview:navView];
     navView.backgroundColor = [UIColor clearColor];
     self.navView = navView;
@@ -570,18 +571,21 @@
     self.titleLabel.font = TECU_FONT(18);
     
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(16, 0, 23, 20)];
-    backImage.center = CGPointMake(backImage.centerX, 42);
+    backImage.center = CGPointMake(backImage.centerX, 42 + (kDevice_Is_iPhoneX ? 10 : 0));
     [navView addSubview:backImage];
 //    backImage.image = [UIImage imageNamed:@"菜单2"];
     
     self.titleLabel.center = CGPointMake(self.view.width / 2, backImage.centerY);
     
     NavLeftButton *leftButton = [NavLeftButton buttonWithType:UIButtonTypeCustom];
-    leftButton.frame = CGRectMake(0, 0, 64, 64);
+    leftButton.frame = CGRectMake(0,  (kDevice_Is_iPhoneX ? 20 : 0), 64, 64);
     [leftButton setImage:[UIImage imageNamed:@"菜单2"] forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"菜单_高亮"] forState:UIControlStateHighlighted];
     [navView addSubview:leftButton];
     [leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    backImage.centerY = leftButton.centerY;
+    self.titleLabel.centerY = backImage.centerY;
     
     UIImageView *rightImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width -  (23 + 18 * WIDTH_NIT), 30, 25, 24)];
     [navView addSubview:rightImage];

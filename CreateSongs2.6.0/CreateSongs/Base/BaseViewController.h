@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) UIImageView *navRightImage;
 
-@property (nonatomic, strong) NavRightButton *navRightButton;
+@property (nonatomic, strong) UIButton *navRightButton;
 
 @property (nonatomic, strong) UILabel *navTitle;
 

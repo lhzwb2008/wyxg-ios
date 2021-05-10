@@ -145,7 +145,7 @@
         
     }
 }
-//http://service.woyaoxiege.com/music/zouyin_acc/frx.mp3
+//http://1.117.109.129/core/music/zouyin_acc/frx.mp3
 
 - (void)sliderValueChanged:(CGFloat)value {
     

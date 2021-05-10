@@ -555,7 +555,7 @@
     
     // http:\/\/service.woyaoxiege.com\/music\/mp3\/a900f0038487f8a3896d38e5792e8c2e_1942.mp3
     
-    NSString *preCodeStr = [self.mp3Url substringFromIndex:40];
+    NSString *preCodeStr = [self.mp3Url componentsSeparatedByString:@"/"].lastObject;
     
     NSString *codeStr = [preCodeStr substringToIndex:preCodeStr.length - 4];
     

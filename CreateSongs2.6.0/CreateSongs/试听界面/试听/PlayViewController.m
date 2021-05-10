@@ -541,8 +541,8 @@ static PlayViewController *sharePlayVC = nil;
             NSArray *stringArr = [string componentsSeparatedByString:@".com"];
             NSArray *shareArr = [shareUrl componentsSeparatedByString:@".com"];
             if (stringArr.count > 1) {
-                string = [NSString stringWithFormat:@"%@%@", @"http://123.59.134.79", stringArr[1]];
-                shareUrl = [NSString stringWithFormat:@"%@%@", @"http://123.59.134.79", shareArr[1]];
+                string = [NSString stringWithFormat:@"%@%@", @"http://1.117.109.129", stringArr[1]];
+                shareUrl = [NSString stringWithFormat:@"%@%@", @"http://1.117.109.129", shareArr[1]];
             }
         }
         if (string.length > 0) {
@@ -587,11 +587,13 @@ static PlayViewController *sharePlayVC = nil;
         return;
     }
     NSString *getMidiUrl = [NSString stringWithFormat:GET_MIDI_FILE, self.changeSingerAPIName];
+    WEAK_SELF;
     [XWAFNetworkTool getUrl:getMidiUrl body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-        
+        STRONG_SELF;
         [TYCommonClass sharedTYCommonClass].midiData = resposeObject;
         [self createTyView];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [KVNProgress showErrorWithStatus:@"MIDI生成失败"];
         [[ToastView sharedToastView] forceHide];
     }];
 }
@@ -716,49 +718,36 @@ static PlayViewController *sharePlayVC = nil;
  */
 - (void)createLyric {
 
-    self.navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    
+    self.navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, navH)];
     [self.view addSubview:self.navView];
     self.navView.backgroundColor = HexStringColor(@"#ffdc74");
     
-    //    self.navLeftImage = [[UIImageView alloc] initWithFrame:CGRectMake(16, 0, 23, 18)];
-    self.navLeftImage = [[UIImageView alloc] initWithFrame:CGRectMake(16, 0, 23, 20)];
-    [self.navView addSubview:self.navLeftImage];
-    self.navLeftImage.center = CGPointMake(self.navLeftImage.centerX, 42);
     
     self.navLeftButton = [NavLeftButton buttonWithType:UIButtonTypeCustom];
-    self.navLeftButton.frame = CGRectMake(0, 0, 64, 64);
+    self.navLeftButton.frame = CGRectMake(0, (kDevice_Is_iPhoneX ? 24 : 0), 64, 64);
     [self.navView addSubview:self.navLeftButton];
     self.navLeftButton.backgroundColor = [UIColor clearColor];
     
     
-    NavRightButton *rightLabel = [NavRightButton buttonWithType:UIButtonTypeCustom];
-    [rightLabel setTitle:@"发布"];
-    rightLabel.titleLabel.font = ZHONGDENG_FONT(15*WIDTH_NIT);
-    
-//    CGSize rightSize = [rightLabel.titleLabel.text getWidth:rightLabel.titleLabel.text andFont:rightLabel.titleLabel.font];
-    rightLabel.frame = CGRectMake(self.view.width - 64, 0, 64, 64);
-//    [rightLabel setTitleColor:[UIColor colorWithHexString:@"#441d11"]];
-
-//    rightLabel.centerY = self.navLeftImage.centerY;
-    [self.navView addSubview:rightLabel];
-    
-//    self.navRightImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - 23 - 16, self.navLeftImage.top, self.navLeftImage.width, self.navLeftImage.height)];
-//    [self.navView addSubview:self.navRightImage];
-    
-    self.navRightButton = (NavRightButton *)rightLabel;
-//    self.navRightButton.frame = CGRectMake(self.view.width - 64, 0, 64, 64);
+    self.navRightButton = [UIButton new];
+    [self.navRightButton setTitle:@"发布" forState:UIControlStateNormal];
+    [self.navRightButton setTitleColor:UIColor.whiteColor];
+    self.navRightButton.titleLabel.font = ZHONGDENG_FONT(15);
+    self.navRightButton.frame = CGRectMake(self.view.width - 44 - 16, (kDevice_Is_iPhoneX ? 44 : 20), 44, 44);
     [self.navRightButton addTarget:self action:@selector(sendRightBtnClick:)];
-//    [self.navView addSubview:self.navRightButton];
     self.navRightButton.backgroundColor = [UIColor clearColor];
+    [self.navView addSubview:self.navRightButton];
+    
     
     self.navTitle = [[UILabel alloc] initWithFrame:CGRectMake(55, 0, self.view.width - 110, 44)];
     [self.navView addSubview:self.navTitle];
-    self.navTitle.center = CGPointMake(self.navTitle.centerX, self.navLeftImage.centerY);
+    self.navTitle.center = CGPointMake(self.navTitle.centerX, self.navRightButton.centerY);
     self.navTitle.textColor = [UIColor colorWithHexString:@"#451d11"];
     self.navTitle.textAlignment = NSTextAlignmentCenter;
     [self.navTitle setFont:TECU_FONT(18)];
     
-//    self.navLeftImage.image = [UIImage imageNamed:@"返回"];
     [self.navLeftButton setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
     [self.navLeftButton setImage:[UIImage imageNamed:@"返回_高亮"] forState:UIControlStateHighlighted];
     

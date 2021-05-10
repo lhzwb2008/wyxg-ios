@@ -445,7 +445,7 @@
     }
     [self scrollViewDidScroll:self.tyScrollView];
 }
-//http://service.woyaoxiege.com/music/mid/44ddf2cc8ffd0406eca4d69592590b84_1.mid
+//http://1.117.109.129/core/music/mid/44ddf2cc8ffd0406eca4d69592590b84_1.mid
 // http://www.woyaoxiege.com/home/index/play/44ddf2cc8ffd0406eca4d69592590b84_1
 - (void)sixTyType {
     WEAK_SELF;

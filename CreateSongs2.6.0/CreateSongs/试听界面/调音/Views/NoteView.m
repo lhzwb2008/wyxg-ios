@@ -418,7 +418,9 @@
     UInt32 deltaTime = inter * 1.0 * [TYCommonClass sharedTYCommonClass].baseTicks / 2 / 4;
     
     self.noteDeltaTime = deltaTime;
-    
+    if (self.noteData.length == 0) {
+        return;
+    }
     NSData *oneData = [self.noteData subdataWithRange:NSMakeRange(0, 1)];
     void *a = (void *)([oneData bytes]);
     memset(a, 0, 1);

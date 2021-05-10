@@ -20,7 +20,7 @@
 #import "Tianci_ChooseSinger_Controller.h"
 
 
-#define ZOUYIN_URL  @"https://service.woyaoxiege.com/core/home/index/zouyin?title=%@&content=%@&yuanqu=%@"
+#define ZOUYIN_URL  @"http://1.117.109.129/core/home/index/zouyin?title=%@&content=%@&yuanqu=%@"
 
 @interface TianciViewController ()
 

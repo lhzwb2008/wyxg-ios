@@ -330,12 +330,14 @@ static NSString *const memberIdentifier = @"memberIdentifier";
 // 创建导航视图
 - (void)createNaviView {
     
-    self.bottomNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    
+    self.bottomNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, navH)];
     [self.view addSubview:self.bottomNavView];
     self.bottomNavView.alpha = 0;
     self.bottomNavView.backgroundColor = [UIColor colorWithHexString:@"#ffdc74"];
     
-    self.naviView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    self.naviView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, navH)];
 
 //    self.gradientLayer = [CAGradientLayer layer];
 //    self.gradientLayer.frame = self.naviView.bounds;
@@ -1059,7 +1061,7 @@ static NSString *const memberIdentifier = @"memberIdentifier";
 - (void)getUserMessage {
     
     WEAK_SELF;
-    //http://service.woyaoxiege.com/core/home/data/getUserById?id=48
+    //http://1.117.109.129/core/home/data/getUserById?id=48
     
     [XWAFNetworkTool getUrl:[NSString stringWithFormat:@"%@?id=%@", GET_USER_ID_URL,self.user_id] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
         STRONG_SELF;
@@ -2489,7 +2491,7 @@ static NSString *const memberIdentifier = @"memberIdentifier";
     if (offsetY == 0) {
         [self resetNavView];
     } else {
-        [self changeNaviOffset:offsetY];
+//        [self changeNaviOffset:offsetY];
         self.barageBtn.hidden = YES;
     }
 
@@ -2694,7 +2696,7 @@ static int i = 0;
     self.totalTime = 0;
     self.currentIndex = 0;
     self.currentTmpIndex = 0;
-    //https://service.woyaoxiege.com/core/home/data/getSongByCode?code=a93beac3bc8c0b27679b0054cb504399_2651
+    //http://1.117.109.129/core/home/data/getSongByCode?code=a93beac3bc8c0b27679b0054cb504399_2651
     WEAK_SELF;
     [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_SONG_MESS, self.songCode] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
         
@@ -2785,7 +2787,7 @@ static int i = 0;
     }];
 }
 
-#define XIANQU_MID  @"https://service.woyaoxiege.com/music/zouyin_mid/%@.mid"
+#define XIANQU_MID  @"http://1.117.109.129/core/music/zouyin_mid/%@.mid"
 
 - (void)tryToRequestXianQuMid {
     if (![XWAFNetworkTool checkNetwork]) {
@@ -2889,7 +2891,7 @@ static int i = 0;
                 [weakSelf.userInfoDataSource setObject:weakSelf.createTimeStr forKey:@"createTime"];
 
                 [self.mainTableView reloadData];
-                //http://service.woyaoxiege.com/core/home/data/getUserById?id=20590
+                //http://1.117.109.129/core/home/data/getUserById?id=20590
             }
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
 

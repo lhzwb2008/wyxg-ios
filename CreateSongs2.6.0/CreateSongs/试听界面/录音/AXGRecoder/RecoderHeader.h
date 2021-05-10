@@ -9,16 +9,16 @@
 #ifndef RecoderHeader_h
 #define RecoderHeader_h
 // 获取伴奏
-#define GET_WAV_MP3 @"http://service.woyaoxiege.com/music/accmp3/%@.mp3"
+#define GET_WAV_MP3 @"http://1.117.109.129/core/music/accmp3/%@.mp3"
 // 上传录音文件
-#define UPLOAD_RECODER  @"http://service.woyaoxiege.com/core/home/index/upload_song"
+#define UPLOAD_RECODER  @"http://1.117.109.129/core/home/index/upload_song"
 
-//http://service.woyaoxiege.com/music/accmp3/95aeeaefa3a0fa529a35fde21bd14af5_2_3.mp3
-//http://service.woyaoxiege.com/core/home/index/copy_song?name=95aeeaefa3a0fa529a35fde21bd14af5_2
-#define COPY_RECODER  @"http://service.woyaoxiege.com/core/home/index/copy_song?name=%@"
+//http://1.117.109.129/core/music/accmp3/95aeeaefa3a0fa529a35fde21bd14af5_2_3.mp3
+//http://1.117.109.129/core/home/index/copy_song?name=95aeeaefa3a0fa529a35fde21bd14af5_2
+#define COPY_RECODER  @"http://1.117.109.129/core/home/index/copy_song?name=%@"
 
 // 换伴奏
-#define CHANG_BG_MUSIC  @"http://service.woyaoxiege.com/core/home/index/call_acc?content=%@&name=%@&genre=%ld&emotion=%ld&rate=%.1f"
+#define CHANG_BG_MUSIC  @"http://1.117.109.129/core/home/index/call_acc?content=%@&name=%@&genre=%ld&emotion=%ld&rate=%.1f"
 /*
  http:// service.woyaoxiege.com/core/home/index/call_acc?content=%@&name=%@&genre=%ld&emotion=%ld&rate=%f
  */

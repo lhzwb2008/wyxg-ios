@@ -137,11 +137,11 @@
  *
  *  @return
  */
-#define WXPAY_ORDER @"https://service.woyaoxiege.com/core/home/pay/sendOrder?description=%@&price=%ld"
+#define WXPAY_ORDER @"http://1.117.109.129/core/home/pay/sendOrder?description=%@&price=%ld"
 
 // gift_type 礼物种类 默认 1
 // gift_type 0 -->  song_id = template_id   user_id = pay_user_id
-#define WXPAY_CHECK_RESULT  @"https://service.woyaoxiege.com/core/home/pay/queryInsertOrder?user_id=%@&song_id=%@&out_trade_no=%@&gift_type=%d&pay_user_id=%@"
+#define WXPAY_CHECK_RESULT  @"http://1.117.109.129/core/home/pay/queryInsertOrder?user_id=%@&song_id=%@&out_trade_no=%@&gift_type=%d&pay_user_id=%@"
 
 /************************************/
 // 主题色
@@ -153,83 +153,83 @@
 // 活动
 #define ACTIVITY_URL @"https://www.woyaoxiege.com/home/index/banner"
 // 主页歌曲
-#define HOME_LYRIC     JUDGE_TEST?@"https://service.woyaoxiege.com/music/lrc/%@.lrc":@"https://123.59.134.79/music/lrc/%@.lrc"
-#define HOME_SOUND     JUDGE_TEST?@"https://service.woyaoxiege.com/music/mp3/%@.mp3":@"https://123.59.134.79/music/mp3/%@.mp3"
+#define HOME_LYRIC     JUDGE_TEST?@"http://1.117.109.129/core/music/lrc/%@.lrc":@"https://123.59.134.79/music/lrc/%@.lrc"
+#define HOME_SOUND     JUDGE_TEST?@"http://1.117.109.129/core/music/mp3/%@.mp3":@"https://123.59.134.79/music/mp3/%@.mp3"
 #define HOME_SHARE     JUDGE_TEST?@"http://www.woyaoxiege.com/home/index/play/%@":@"http://123.59.134.79/home/index/play/%@"
 // get_midi_file
-#define GET_MIDI_FILE   JUDGE_TEST?@"https://service.woyaoxiege.com/music/mid/%@.mid":@"https://123.59.134.79/music/mid/%@.mid"
+#define GET_MIDI_FILE   JUDGE_TEST?@"http://1.117.109.129/core/music/mid/%@.mid":@"https://123.59.134.79/music/mid/%@.mid"
 // 作曲API
-#define CREATE_URL_ALL   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/call?title=%@&content=%@&":@"https://123.59.134.79/core/home/index/call?title=%@&content=%@&"
-#define CREATE_URL       JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/call?title=%@&content=%@,%@,%@,%@&":@"https://123.59.134.79/core/home/index/call?title=%@&content=%@,%@,%@,%@&"
-#define CREATE_Eight     JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/call?title=%@&content=%@,%@,%@,%@,%@,%@,%@,%@&":@"https://123.59.134.79/core/home/index/call?title=%@&content=%@,%@,%@,%@,%@,%@,%@,%@&"
+#define CREATE_URL_ALL   JUDGE_TEST?@"http://1.117.109.129/core/home/index/call?title=%@&content=%@&":@"https://123.59.134.79/core/home/index/call?title=%@&content=%@&"
+#define CREATE_URL       JUDGE_TEST?@"http://1.117.109.129/core/home/index/call?title=%@&content=%@,%@,%@,%@&":@"https://123.59.134.79/core/home/index/call?title=%@&content=%@,%@,%@,%@&"
+#define CREATE_Eight     JUDGE_TEST?@"http://1.117.109.129/core/home/index/call?title=%@&content=%@,%@,%@,%@,%@,%@,%@,%@&":@"https://123.59.134.79/core/home/index/call?title=%@&content=%@,%@,%@,%@,%@,%@,%@,%@&"
 #define PARAMETER        @"source=%ld&genre=%ld&emotion=%ld&rate=%.1f"
 // call_mid
-#define TY_CALL_MID      JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/call_mid":@"https://123.59.134.79/core/home/index/call_mid"
+#define TY_CALL_MID      JUDGE_TEST?@"http://1.117.109.129/core/home/index/call_mid":@"https://123.59.134.79/core/home/index/call_mid"
 // ty_get_midi
-#define TY_GET_MID            JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/get_mid":@"https://123.59.134.79/core/home/index/get_mid"
-#define GET_SONG_BY_SOURCE    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/change_voice?content=%@&source=%ld&name=%@":@"https://123.59.134.79/core/home/index/change_voice?content=%@&source=%ld&name=%@"
+#define TY_GET_MID            JUDGE_TEST?@"http://1.117.109.129/core/home/index/get_mid":@"https://123.59.134.79/core/home/index/get_mid"
+#define GET_SONG_BY_SOURCE    JUDGE_TEST?@"http://1.117.109.129/core/home/index/change_voice?content=%@&source=%ld&name=%@":@"https://123.59.134.79/core/home/index/change_voice?content=%@&source=%ld&name=%@"
 // 添加用户URL  status == 0(添加成功) -1(提交格式有问题) -2/报错(服务器报错)
-#define ADD_USER_URL      JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addUser?phone=%@&password=%@":@"https://123.59.134.79/core/home/data/addUser?phone=%@&password=%@"
+#define ADD_USER_URL      JUDGE_TEST?@"http://1.117.109.129/core/home/data/addUser?phone=%@&password=%@":@"https://123.59.134.79/core/home/data/addUser?phone=%@&password=%@"
 // 更新用户信息 status == 0(更新成功过) -1(更新失败)
-#define UPDATE_USER_URL   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/updateUser?phone=%@&name=%@&gender=%@&birthday=%@&signature=%@&weibo=%@&qq=%@&wechat=%@&location=%@&school_company=%@":@"https://123.59.134.79/core/home/data/updateUser?phone=%@&name=%@&gender=%@&birthday=%@&signature=%@&weibo=%@&qq=%@&wechat=%@&location=%@&school_company=%@"
+#define UPDATE_USER_URL   JUDGE_TEST?@"http://1.117.109.129/core/home/data/updateUser?phone=%@&name=%@&gender=%@&birthday=%@&signature=%@&weibo=%@&qq=%@&wechat=%@&location=%@&school_company=%@":@"https://123.59.134.79/core/home/data/updateUser?phone=%@&name=%@&gender=%@&birthday=%@&signature=%@&weibo=%@&qq=%@&wechat=%@&location=%@&school_company=%@"
 // 查询用户URL  status == 0(返回成功) -1(用户不存在) -2(查询报错)
-#define GET_USER_URL      JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getUser?phone=%@":@"https://123.59.134.79/core/home/data/getUser?phone=%@"
+#define GET_USER_URL      JUDGE_TEST?@"http://1.117.109.129/core/home/data/getUser?phone=%@":@"https://123.59.134.79/core/home/data/getUser?phone=%@"
 // 通过id查询用户URL
-#define GET_USER_ID_URL   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getUserById?id=%@":@"https://123.59.134.79/core/home/data/getUserById?id=%@"
+#define GET_USER_ID_URL   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getUserById?id=%@":@"https://123.59.134.79/core/home/data/getUserById?id=%@"
 // 上传用户头像
-#define UPDATE_USER_HEAD JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/uploadUserImg":@"https://123.59.134.79/core/home/data/uploadUserImg"
+#define UPDATE_USER_HEAD JUDGE_TEST?@"http://1.117.109.129/core/home/data/uploadUserImg":@"https://123.59.134.79/core/home/data/uploadUserImg"
 // 获取用户头像URL
-#define GET_USER_HEAD JUDGE_TEST?@"https://service.woyaoxiege.com/music/userPng/%@.png":@"https://123.59.134.79/music/userPng/%@.png"
+#define GET_USER_HEAD JUDGE_TEST?@"http://1.117.109.129/core/music/userPng/%@.png":@"https://123.59.134.79/music/userPng/%@.png"
 // 上传用户歌曲图片
-#define UPLOAD_USER_IMG JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/index/upload_img":@"https://123.59.134.79/core/home/index/upload_img"
+#define UPLOAD_USER_IMG JUDGE_TEST?@"http://1.117.109.129/core/home/index/upload_img":@"https://123.59.134.79/core/home/index/upload_img"
 // 获取最新
 // start 开始location    length 长度length
-#define GET_LASTEST JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getZuixin?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getZuixin?start=%ld&length=%ld"
+#define GET_LASTEST JUDGE_TEST?@"http://1.117.109.129/core/home/data/getZuixin?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getZuixin?start=%ld&length=%ld"
 // 获取最新演唱
-#define GET_LASTEST_SING JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getZuixinChang?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getZuixinChang?start=%ld&length=%ld"
+#define GET_LASTEST_SING JUDGE_TEST?@"http://1.117.109.129/core/home/data/getZuixinChang?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getZuixinChang?start=%ld&length=%ld"
 // 获取最新改曲
-#define GET_LASTEST_GAI JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getZuixinGai?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getZuixinGai?start=%ld&length=%ld"
+#define GET_LASTEST_GAI JUDGE_TEST?@"http://1.117.109.129/core/home/data/getZuixinGai?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getZuixinGai?start=%ld&length=%ld"
 
 // 获取推荐
 // start 开始location    length 长度length
-#define GET_RECOMMAND JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getTuijian?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getTuijian?start=%ld&length=%ld"
+#define GET_RECOMMAND JUDGE_TEST?@"http://1.117.109.129/core/home/data/getTuijian?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getTuijian?start=%ld&length=%ld"
 
 // 获取人声推荐
-#define GET_SING_SONG JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getSingTuijian?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getSingTuijian?start=%ld&length=%ld"
+#define GET_SING_SONG JUDGE_TEST?@"http://1.117.109.129/core/home/data/getSingTuijian?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getSingTuijian?start=%ld&length=%ld"
 /**
  *  获取banner
  */
-#define GET_BANNER JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getbanners":@"https://123.59.134.79/core/home/data/getbanners"
+#define GET_BANNER JUDGE_TEST?@"http://1.117.109.129/core/home/data/getbanners":@"https://123.59.134.79/core/home/data/getbanners"
 
-#define TEMPLATE_BY_ID JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getTemplateById?id=%@":@"https://123.59.134.79/core/home/data/getTemplateById?id=%@"
+#define TEMPLATE_BY_ID JUDGE_TEST?@"http://1.117.109.129/core/home/data/getTemplateById?id=%@":@"https://123.59.134.79/core/home/data/getTemplateById?id=%@"
 
 //获取用户已购买歌曲
-#define ZOUYIN_GET_BUYED_SONGS JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getTemplateBuyByUserId?user_id=%@":@"https://123.59.134.79/core/home/data/getTemplateBuyByUserId?user_id=%@"
+#define ZOUYIN_GET_BUYED_SONGS JUDGE_TEST?@"http://1.117.109.129/core/home/data/getTemplateBuyByUserId?user_id=%@":@"https://123.59.134.79/core/home/data/getTemplateBuyByUserId?user_id=%@"
 //添加歌曲模板到用户已购买列表
-#define ZOUYIN_ADD_BUYED_SONG JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addTemplateBuy?user_id=%@&template_id=%@":@"https://123.59.134.79/core/home/data/addTemplateBuy?user_id=%@&template_id=%@"
+#define ZOUYIN_ADD_BUYED_SONG JUDGE_TEST?@"http://1.117.109.129/core/home/data/addTemplateBuy?user_id=%@&template_id=%@":@"https://123.59.134.79/core/home/data/addTemplateBuy?user_id=%@&template_id=%@"
 
-#define ZOUYIN_TEMPLATE JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getTemplate":@"https://123.59.134.79/core/home/data/getTemplate"
+#define ZOUYIN_TEMPLATE JUDGE_TEST?@"http://1.117.109.129/core/home/data/getTemplate":@"https://123.59.134.79/core/home/data/getTemplate"
 /**
  *  根据名字获取图片
  */
-#define GET_SONG_IMG    JUDGE_TEST?@"https://service.woyaoxiege.com/music/png/%@.png":@"https://123.59.134.79/music/png/%@.png"
+#define GET_SONG_IMG    JUDGE_TEST?@"http://1.117.109.129/core/music/png/%@.png":@"https://123.59.134.79/music/png/%@.png"
 // 获取指定id用户歌曲
-#define GET_USER_SONGS JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getSongsByUserId?user_id=%@":@"https://123.59.134.79/core/home/data/getSongsByUserId?user_id=%@"
+#define GET_USER_SONGS JUDGE_TEST?@"http://1.117.109.129/core/home/data/getSongsByUserId?user_id=%@":@"https://123.59.134.79/core/home/data/getSongsByUserId?user_id=%@"
 // 上传社区
 // user_id 用户id     code 上传歌曲名称(md5格式)
-#define UPLOAD_COMMUNITY JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addSong?user_id=%@&code=%@&device=%@&public=%@&tag=%@&sing=%@&activity_id=%@&gai=%@&original_title=%@&zuoci_id=%@&zuoqu_id=%@&yanchang_id=%@&template_id=%@":@"https://123.59.134.79/core/home/data/addSong?user_id=%@&code=%@&device=%@&public=%@&tag=%@&sing=%@&activity_id=%@&gai=%@&original_title=%@&zuoci_id=%@&zuoqu_id=%@&yanchang_id=%@&template_id=%@"
+#define UPLOAD_COMMUNITY JUDGE_TEST?@"http://1.117.109.129/core/home/data/addSong?user_id=%@&code=%@&device=%@&public=%@&tag=%@&sing=%@&activity_id=%@&gai=%@&original_title=%@&zuoci_id=%@&zuoqu_id=%@&yanchang_id=%@&template_id=%@":@"https://123.59.134.79/core/home/data/addSong?user_id=%@&code=%@&device=%@&public=%@&tag=%@&sing=%@&activity_id=%@&gai=%@&original_title=%@&zuoci_id=%@&zuoqu_id=%@&yanchang_id=%@&template_id=%@"
 // 删除歌曲
-#define DEL_BY_CODE JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/delByCode?code=%@":@"https://123.59.134.79/core/home/data/delByCode?code=%@"
+#define DEL_BY_CODE JUDGE_TEST?@"http://1.117.109.129/core/home/data/delByCode?code=%@":@"https://123.59.134.79/core/home/data/delByCode?code=%@"
 
 // 删除歌曲
-#define DEL_COMMENTS_BY_ID JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/delComments?id=%@":@"https://123.59.134.79/core/home/data/delComments?id=%@"
+#define DEL_COMMENTS_BY_ID JUDGE_TEST?@"http://1.117.109.129/core/home/data/delComments?id=%@":@"https://123.59.134.79/core/home/data/delComments?id=%@"
 
 /**
  *  删除用户，慎用，客户端里没有用到
  */
-#define DEL_BY_PHONE JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/delUserByPhone?phone=%@":@"https://123.59.134.79/core/home/data/delUserByPhone?phone=%@"
+#define DEL_BY_PHONE JUDGE_TEST?@"http://1.117.109.129/core/home/data/delUserByPhone?phone=%@":@"https://123.59.134.79/core/home/data/delUserByPhone?phone=%@"
 // 增加播放数
-#define ADD_PLAYCOUNT JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addPlay?code=%@":@"https://123.59.134.79/core/home/data/addPlay?code=%@"
+#define ADD_PLAYCOUNT JUDGE_TEST?@"http://1.117.109.129/core/home/data/addPlay?code=%@":@"https://123.59.134.79/core/home/data/addPlay?code=%@"
 /**
  *  调用此接口获取song_id
  
@@ -246,97 +246,97 @@
  }
   
  */
-#define GET_SONG_MESS   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getSongByCode?code=%@":@"https://123.59.134.79/core/home/data/getSongByCode?code=%@"
-#define GET_SONG_BY_ID  JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getSongById?id=%@":@"https://123.59.134.79/core/home/data/getSongById?id=%@"
-#define GET_COMMENTS    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getCommentsBySongId?song_id=%@":@"https://123.59.134.79/core/home/data/getCommentsBySongId?song_id=%@"
-#define ADD_COMMENTS    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addComments?user_id=%@&song_id=%@&content=%@&parent=%@":@"https://123.59.134.79/core/home/data/addComments?user_id=%@&song_id=%@&content=%@&parent=%@"
-#define UP_SONGS        JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/upByCode?code=%@":@"https://123.59.134.79/core/home/data/upByCode?code=%@"
+#define GET_SONG_MESS   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getSongByCode?code=%@":@"https://123.59.134.79/core/home/data/getSongByCode?code=%@"
+#define GET_SONG_BY_ID  JUDGE_TEST?@"http://1.117.109.129/core/home/data/getSongById?id=%@":@"https://123.59.134.79/core/home/data/getSongById?id=%@"
+#define GET_COMMENTS    JUDGE_TEST?@"http://1.117.109.129/core/home/data/getCommentsBySongId?song_id=%@":@"https://123.59.134.79/core/home/data/getCommentsBySongId?song_id=%@"
+#define ADD_COMMENTS    JUDGE_TEST?@"http://1.117.109.129/core/home/data/addComments?user_id=%@&song_id=%@&content=%@&parent=%@":@"https://123.59.134.79/core/home/data/addComments?user_id=%@&song_id=%@&content=%@&parent=%@"
+#define UP_SONGS        JUDGE_TEST?@"http://1.117.109.129/core/home/data/upByCode?code=%@":@"https://123.59.134.79/core/home/data/upByCode?code=%@"
 
-#define UP_COMMENTS      JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/upComment?id=%@":@"https://123.59.134.79/core/home/data/upComment?id=%@"
+#define UP_COMMENTS      JUDGE_TEST?@"http://1.117.109.129/core/home/data/upComment?id=%@":@"https://123.59.134.79/core/home/data/upComment?id=%@"
 /**
  *  举报
  */
-#define CHEAT_SONGS     JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/setCheatByCode?code=%@":@"https://123.59.134.79/core/home/data/setCheatByCode?code=%@"
+#define CHEAT_SONGS     JUDGE_TEST?@"http://1.117.109.129/core/home/data/setCheatByCode?code=%@":@"https://123.59.134.79/core/home/data/setCheatByCode?code=%@"
 /**
  *  获取关注的人列表
  */
-#define GET_FOCUS     JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getFocusByfollowId?follow_id=%@":@"https://123.59.134.79/core/home/data/getFocusByfollowId?follow_id=%@"
+#define GET_FOCUS     JUDGE_TEST?@"http://1.117.109.129/core/home/data/getFocusByfollowId?follow_id=%@":@"https://123.59.134.79/core/home/data/getFocusByfollowId?follow_id=%@"
 /**
  *  获取粉丝列表
  */
-#define GET_FOLLOW     JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getFocusByfocusId?focus_id=%@":@"https://123.59.134.79/core/home/data/getFocusByfocusId?focus_id=%@"
+#define GET_FOLLOW     JUDGE_TEST?@"http://1.117.109.129/core/home/data/getFocusByfocusId?focus_id=%@":@"https://123.59.134.79/core/home/data/getFocusByfocusId?focus_id=%@"
 /**
  *  添加关注
  */
-#define ADD_FOCUS     JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addFocus?focus_id=%@&follow_id=%@":@"https://123.59.134.79/core/home/data/addFocus?focus_id=%@&follow_id=%@"
+#define ADD_FOCUS     JUDGE_TEST?@"http://1.117.109.129/core/home/data/addFocus?focus_id=%@&follow_id=%@":@"https://123.59.134.79/core/home/data/addFocus?focus_id=%@&follow_id=%@"
 /**
  *  取消关注
  */
-#define DEL_FOCUS     JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/delFocus?focus_id=%@&follow_id=%@":@"https://123.59.134.79/core/home/data/delFocus?focus_id=%@&follow_id=%@"
+#define DEL_FOCUS     JUDGE_TEST?@"http://1.117.109.129/core/home/data/delFocus?focus_id=%@&follow_id=%@":@"https://123.59.134.79/core/home/data/delFocus?focus_id=%@&follow_id=%@"
 /**
  *  添加喜欢
  */
-#define ADD_LIKE    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addLike?user_id=%@&song_id=%@":@"https://123.59.134.79/core/home/data/addLike?user_id=%@&song_id=%@"
+#define ADD_LIKE    JUDGE_TEST?@"http://1.117.109.129/core/home/data/addLike?user_id=%@&song_id=%@":@"https://123.59.134.79/core/home/data/addLike?user_id=%@&song_id=%@"
 /**
  *  取消喜欢
  */
-#define DEL_LIKE    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/delLike?user_id=%@&song_id=%@":@"https://123.59.134.79/core/home/data/delLike?user_id=%@&song_id=%@"
+#define DEL_LIKE    JUDGE_TEST?@"http://1.117.109.129/core/home/data/delLike?user_id=%@&song_id=%@":@"https://123.59.134.79/core/home/data/delLike?user_id=%@&song_id=%@"
 /**
  *  获取喜欢
  */
-#define GET_LIKE    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getLikeByuserId?user_id=%@":@"https://123.59.134.79/core/home/data/getLikeByuserId?user_id=%@"
+#define GET_LIKE    JUDGE_TEST?@"http://1.117.109.129/core/home/data/getLikeByuserId?user_id=%@":@"https://123.59.134.79/core/home/data/getLikeByuserId?user_id=%@"
 /**
  *  添加站内信
  *
  *  receive_id  接收消息人, send_id  发送消息人, type  消息类型（0-点赞 1-评论 2-关注 3-回复 4-系统消息 5-礼物）,song_id  相关歌曲id, content  系统消息内容, song_title   歌曲名             除了receive_id都可以缺省
  */
-#define ADD_MESSAGE  JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addMessage?receive_id=%@&send_id=%@&type=%@&song_id=%@&content=%@&song_title=%@":@"https://123.59.134.79/core/home/data/addMessage?receive_id=%@&send_id=%@&type=%@&song_id=%@&content=%@song_title=%@"
+#define ADD_MESSAGE  JUDGE_TEST?@"http://1.117.109.129/core/home/data/addMessage?receive_id=%@&send_id=%@&type=%@&song_id=%@&content=%@&song_title=%@":@"https://123.59.134.79/core/home/data/addMessage?receive_id=%@&send_id=%@&type=%@&song_id=%@&content=%@song_title=%@"
 /**
  *  获取站内信
  */
-#define GET_MESSAGE   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getMessageByReceiveId?receive_id=%@":@"https://123.59.134.79/core/home/data/getMessageByReceiveId?receive_id=%@"
+#define GET_MESSAGE   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getMessageByReceiveId?receive_id=%@":@"https://123.59.134.79/core/home/data/getMessageByReceiveId?receive_id=%@"
 /**
  *  设置为已读
  */
-#define SET_READ   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/setReadById?id=%@":@"https://123.59.134.79/core/home/data/setReadById?id=%@"
+#define SET_READ   JUDGE_TEST?@"http://1.117.109.129/core/home/data/setReadById?id=%@":@"https://123.59.134.79/core/home/data/setReadById?id=%@"
 /**
  *  删除站内信
  */
-#define DEl_MSG   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/delMessage?id=%@":@"https://123.59.134.79/core/home/data/delMessage?id=%@"
+#define DEl_MSG   JUDGE_TEST?@"http://1.117.109.129/core/home/data/delMessage?id=%@":@"https://123.59.134.79/core/home/data/delMessage?id=%@"
 /**
  *  获取达人
  */
-#define GET_RECOMMAND_USER   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getRecommendUser":@"https://123.59.134.79/core/home/data/getRecommendUser"
+#define GET_RECOMMAND_USER   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getRecommendUser":@"https://123.59.134.79/core/home/data/getRecommendUser"
 /**
  *  获取所有活动
  */
-#define GET_ACTIVITY   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getAllActivities":@"https://123.59.134.79/core/home/data/getAllActivities"
+#define GET_ACTIVITY   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getAllActivities":@"https://123.59.134.79/core/home/data/getAllActivities"
 /**
  *  获取活动歌曲
  */
-#define GET_ACTIVITY_SONGS   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getActivitySong?activity_id=%@":@"https://123.59.134.79/core/home/data/getActivitySong?activity_id=%@"
+#define GET_ACTIVITY_SONGS   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getActivitySong?activity_id=%@":@"https://123.59.134.79/core/home/data/getActivitySong?activity_id=%@"
 
 /**
  *  获取活动歌曲带参版
  */
-#define GET_ACTIVITY_SONGS_PAR   JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getActivitySong?activity_id=%@&start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getActivitySong?activity_id=%@&start=%ld&length=%ld"
+#define GET_ACTIVITY_SONGS_PAR   JUDGE_TEST?@"http://1.117.109.129/core/home/data/getActivitySong?activity_id=%@&start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getActivitySong?activity_id=%@&start=%ld&length=%ld"
 
 /**
  *  发帖   post请求   参数： user_id  content  is_top  可传图   传图成功 status == 0  不传图 status == -1
  */
-#define ADD_POST                    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addPost":@"https://123.59.134.79/core/home/data/addPost"
+#define ADD_POST                    JUDGE_TEST?@"http://1.117.109.129/core/home/data/addPost":@"https://123.59.134.79/core/home/data/addPost"
 /**
  *  发帖子评论  parent可为空
  */
-#define ADD_POST_COMMENT            JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/addPostComments?user_id=%@&post_id=%@&content=%@&parent=%@":@"https://123.59.134.79/core/home/data/addPostComments?user_id=%@&post_id=%@&content=%@&parent=%@"
+#define ADD_POST_COMMENT            JUDGE_TEST?@"http://1.117.109.129/core/home/data/addPostComments?user_id=%@&post_id=%@&content=%@&parent=%@":@"https://123.59.134.79/core/home/data/addPostComments?user_id=%@&post_id=%@&content=%@&parent=%@"
 /**
  *  获取帖子
  */
-#define GET_POST                    JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getPosts?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getPosts?start=%ld&length=%ld"
+#define GET_POST                    JUDGE_TEST?@"http://1.117.109.129/core/home/data/getPosts?start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getPosts?start=%ld&length=%ld"
 /**
  *  获取帖子评论
  */
-#define GET_POST_COMMENT            JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getPostComments?post_id=%@":@"https://123.59.134.79/core/home/data/getPostComments?post_id=%@"
+#define GET_POST_COMMENT            JUDGE_TEST?@"http://1.117.109.129/core/home/data/getPostComments?post_id=%@":@"https://123.59.134.79/core/home/data/getPostComments?post_id=%@"
 /**
  *  微博获取个人信息
  */
@@ -350,28 +350,28 @@
  */
 #define GET_WECHAT_INFO @"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@"
 
-#define GET_RANK_LIST   @"https://service.woyaoxiege.com/core/home/data/getZhoubang?start=%d&length=%d"
+#define GET_RANK_LIST   @"http://1.117.109.129/core/home/data/getZhoubang?start=%d&length=%d"
 
 // 获取机器人
-#define GET_ROBOT       JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getRobotUser?num=%ld":@"https://123.59.134.79/core/home/data/getRobotUser?num=%ld"
+#define GET_ROBOT       JUDGE_TEST?@"http://1.117.109.129/core/home/data/getRobotUser?num=%ld":@"https://123.59.134.79/core/home/data/getRobotUser?num=%ld"
 
 // 获取好歌词
-#define GET_GOOD_LYRIC  JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getHaogeci":@"https://123.59.134.79/core/home/data/getHaogeci"
+#define GET_GOOD_LYRIC  JUDGE_TEST?@"http://1.117.109.129/core/home/data/getHaogeci":@"https://123.59.134.79/core/home/data/getHaogeci"
 
 // 获取歌单
-#define GET_GEDANS      JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getGedans":@"https://123.59.134.79/core/home/data/getGedans"
+#define GET_GEDANS      JUDGE_TEST?@"http://1.117.109.129/core/home/data/getGedans":@"https://123.59.134.79/core/home/data/getGedans"
 
 // 获取歌单歌曲
-#define GET_GEDAN_SONGS JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getGedanSong?gedan_id=%@&start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getGedanSong?gedan_id=%@&start=%ld&length=%ld"
+#define GET_GEDAN_SONGS JUDGE_TEST?@"http://1.117.109.129/core/home/data/getGedanSong?gedan_id=%@&start=%ld&length=%ld":@"https://123.59.134.79/core/home/data/getGedanSong?gedan_id=%@&start=%ld&length=%ld"
 
 // 获取余额
-#define GET_MONEY JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/pay/getUserMoney?user_id=%@":@"https://123.59.134.79/core/home/pay/getUserMoney?user_id=%@"
-//https://service.woyaoxiege.com/core/home/pay/getUserMoney?user_id=2422
+#define GET_MONEY JUDGE_TEST?@"http://1.117.109.129/core/home/pay/getUserMoney?user_id=%@":@"https://123.59.134.79/core/home/pay/getUserMoney?user_id=%@"
+//http://1.117.109.129/core/home/pay/getUserMoney?user_id=2422
 // 搜索接口
-#define Search_API JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/search?name=%@":@"https://123.59.134.79/core/home/data/search?name=%@"
+#define Search_API JUDGE_TEST?@"http://1.117.109.129/core/home/data/search?name=%@":@"https://123.59.134.79/core/home/data/search?name=%@"
 
 // 获取歌曲礼物
-#define GET_SONG_GIFT JUDGE_TEST?@"https://service.woyaoxiege.com/core/home/data/getGiftBySongId?song_id=%@":@"https://123.59.134.79/core/home/data/getGiftBySongId?song_id=%@"
+#define GET_SONG_GIFT JUDGE_TEST?@"http://1.117.109.129/core/home/data/getGiftBySongId?song_id=%@":@"https://123.59.134.79/core/home/data/getGiftBySongId?song_id=%@"
 
 #pragma mark - /*******************URL跳转*******************/
 
@@ -421,7 +421,7 @@
 //
 //function activityDetail() {
 //    var id = "100";
-//    var img = "http://service.woyaoxiege.com/music/activityPng/100.png";
+//    var img = "http://1.117.109.129/core/music/activityPng/100.png";
 //    var title = "“初恋”主题歌词征集";
 //    window.location.href = "wyxg://www.woyaoxiege.com?action=activityDetail&param={'id':'"+id+"','img':'"+img+"','title':'"+title+"'}";
 //}
