@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "ShareViewController.h"
 #import "LoginViewController.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AFHTTPSessionManager.h"
 #import "KVNProgress.h"
 #import "AXGTools.h"

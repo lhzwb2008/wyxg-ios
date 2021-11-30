@@ -229,44 +229,44 @@
 // 刷新站内信数据
 - (void)reloadMsg {
     
-    NSMutableArray *mutaArr = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
-        
-        //     获取用户id
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
-        NSString *userId = [wrapper objectForKey:(id)kSecValueData];
-        
-        WEAK_SELF;
-        [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_MESSAGE, userId] body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-            NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:resposeObject options:0 error:nil];
-            STRONG_SELF;
-            if ([dic1[@"status"] isEqualToNumber:@0]) {
-                NSArray *array = dic1[@"items"];
-                
-                for (NSDictionary *dic in array) {
-                    if ([dic[@"is_read"] isEqualToString:@"1"]) {
-                        
-                    } else {
-                        [mutaArr addObject:dic];
-                    }
-                }
-                
-                if (mutaArr.count != 0) {
-                    self.msgView.hidden = NO;
-                } else {
-                    self.msgView.hidden = YES;
-                }
-                
-            } else {
-                self.msgView.hidden = YES;
-            }
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            self.msgView.hidden = YES;
-        }];
-    } else {
+//    NSMutableArray *mutaArr = [[NSMutableArray alloc] initWithCapacity:0];
+//
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
+//
+//        //     获取用户id
+//        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
+//        NSString *userId = [wrapper objectForKey:(id)kSecValueData];
+//
+//        WEAK_SELF;
+//        [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_MESSAGE, userId] body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+//            NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:resposeObject options:0 error:nil];
+//            STRONG_SELF;
+//            if ([dic1[@"status"] isEqualToNumber:@0]) {
+//                NSArray *array = dic1[@"items"];
+//
+//                for (NSDictionary *dic in array) {
+//                    if ([dic[@"is_read"] isEqualToString:@"1"]) {
+//
+//                    } else {
+//                        [mutaArr addObject:dic];
+//                    }
+//                }
+//
+//                if (mutaArr.count != 0) {
+//                    self.msgView.hidden = NO;
+//                } else {
+//                    self.msgView.hidden = YES;
+//                }
+//
+//            } else {
+//                self.msgView.hidden = YES;
+//            }
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//            self.msgView.hidden = YES;
+//        }];
+//    } else {
         self.msgView.hidden = YES;
-    }
+//    }
     
 }
 

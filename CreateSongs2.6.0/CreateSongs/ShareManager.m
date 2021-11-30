@@ -15,7 +15,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
 #import "AppDelegate.h"
-#import "UMSocial.h"
+#import <UMShare/UMShare.h>
 #import "YYImage.h"
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+MJ.h"
@@ -109,7 +109,7 @@
     req.message = message;
     req.scene = WXSceneSession;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
 }
 
 // 朋友圈分享按钮
@@ -147,7 +147,7 @@
     req.message = message;
     req.scene = WXSceneTimeline;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
 }
 
 // QQ分享按钮
@@ -230,15 +230,16 @@
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-    [[UMSocialDataService defaultDataService] postSNSWithTypes:@[UMShareToSina] content:web image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            NSLog(@"分享成功");
-            AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            myAppDelegate.willShowShareToast = YES;
-            //            [MobClick event:@"play_weiboShareSuccess"];
-        }
+    UMSocialMessageObject *messageObject =[UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:writer thumImage:[UIImage imageNamed:@"shareIcon"]];
+    shareObject.webpageUrl = web;
+    messageObject.shareObject = shareObject;
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Sina messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+        NSLog(@"分享成功");
+        AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        myAppDelegate.willShowShareToast = YES;
+//        [MobClick event:@"play_weiboShareSuccess"];
     }];
-    
 }
 
 @end

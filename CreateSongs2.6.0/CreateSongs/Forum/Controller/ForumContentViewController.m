@@ -19,7 +19,7 @@
 #import "XWAFNetworkTool.h"
 #import "KeychainItemWrapper.h"
 #import <Security/Security.h>
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AppDelegate.h"
 #import "ForumCommentFrameModel.h"
 #import "OtherPersonCenterController.h"

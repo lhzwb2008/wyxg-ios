@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AXGHeader.h"
 #import "AppDelegate.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AFNetworking.h"
 #import "KeychainItemWrapper.h"
 #import <Security/Security.h>

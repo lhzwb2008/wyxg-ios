@@ -8,7 +8,7 @@
 
 #import "PersonInfoView.h"
 #import "AXGHeader.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AFNetworking.h"
 #import "XWAFNetworkTool.h"
 #import "KeychainItemWrapper.h"

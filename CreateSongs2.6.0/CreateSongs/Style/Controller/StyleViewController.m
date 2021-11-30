@@ -11,7 +11,7 @@
 #import "ReleaseViewController.h"
 #import "TYCommonClass.h"
 #import "PlayViewController.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AXGTools.h"
 
 #define DEFUALTROW1 1

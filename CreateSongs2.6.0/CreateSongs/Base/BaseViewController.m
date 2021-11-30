@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 
 @interface BaseViewController ()
 

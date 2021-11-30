@@ -7,13 +7,13 @@
 //
 
 #import "WebViewController.h"
-#import "UIWebView+AFNetworking.h"
 #import "AXGMediator+MediatorModuleAActions.h"
 #import "AXGMediator.h"
+#import <WebKit/WebKit.h>
 
-@interface WebViewController ()<UIWebViewDelegate>
+@interface WebViewController ()<WKUIDelegate, WKNavigationDelegate>
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, copy) NSString *urlString;
 
@@ -51,12 +51,13 @@
 }
 
 - (void)createWebView {
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64)];
     NSProgress *progress  = [[NSProgress alloc] init];
 
   
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    self.webView.delegate = self;
+    self.webView.navigationDelegate = self;
+    self.webView.UIDelegate = self;
     [self.view addSubview:self.webView];
     
 //    NSString *oldAgent = [self.webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
@@ -86,13 +87,17 @@
 }
 
 #pragma mark - webViewDelegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = false;
-    self.navTitle.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];;
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    if ([self shouldContinueWithRequest:navigationAction.request]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }
+    decisionHandler(WKNavigationActionPolicyCancel);
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
+
+- (BOOL)shouldContinueWithRequest:(NSURLRequest *)request {
     NSURL *requestUrl = [request URL];
     NSString *urlString = requestUrl.absoluteString;
     NSLog(@"%@", urlString);
@@ -139,23 +144,5 @@
 
 // 通信格式  @"wyxg://www.woyaoxiege.com?action=share&img=%@&title=%@&description=%@&url=%@"
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = true;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

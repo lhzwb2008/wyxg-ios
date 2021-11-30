@@ -8,7 +8,7 @@
 
 #import "PlayUserSongViewController.h"
 #import "AXGHeader.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "YSLTransitionAnimator.h"
 #import "UIViewController+YSLTransition.h"
 #import "UIView+Common.h"
@@ -42,7 +42,7 @@
 //#import "MessageIdentifyViewController.h"
 #import "UserSongShareView.h"
 #import "WXApi.h"
-#import "UMSocial.h"
+#import <UMShare/UMShare.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterfaceObject.h>
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -83,7 +83,7 @@ static NSString *const memberIdentifier = @"memberIdentifier";
 #define IMAGE_WIDTH            arc4random()%20 + 10
 #define PLUS_HEIGHT            Main_Screen_Height/25
 
-@interface PlayUserSongViewController ()<YSLTransitionAnimatorDataSource, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, ParserProtocol, WXApiDelegate, UMSocialUIDelegate>
+@interface PlayUserSongViewController ()<YSLTransitionAnimatorDataSource, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, ParserProtocol, WXApiDelegate>
 
 @property (nonatomic, assign) BOOL isEnd;
 
@@ -763,7 +763,7 @@ static NSString *const memberIdentifier = @"memberIdentifier";
     req.message = message;
     req.scene = WXSceneSession;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
     
     AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     myAppDelegate.ShareType = wxShare;
@@ -811,7 +811,7 @@ static NSString *const memberIdentifier = @"memberIdentifier";
     req.message = message;
     req.scene = WXSceneTimeline;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
     
     AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     myAppDelegate.ShareType = wxFriend;
@@ -916,16 +916,16 @@ static NSString *const memberIdentifier = @"memberIdentifier";
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-    
-    [[UMSocialDataService defaultDataService] postSNSWithTypes:@[UMShareToSina] content:web image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            NSLog(@"分享成功");
-            AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            myAppDelegate.willShowShareToast = YES;
-            [MobClick event:@"play_weiboShareSuccess"];
-        }
+    UMSocialMessageObject *messageObject =[UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:writer thumImage:[UIImage imageNamed:@"shareIcon"]];
+    shareObject.webpageUrl = web;
+    messageObject.shareObject = shareObject;
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Sina messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+        NSLog(@"分享成功");
+        AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        myAppDelegate.willShowShareToast = YES;
+//        [MobClick event:@"play_weiboShareSuccess"];
     }];
-    
 }
 
 #pragma mark - *************返回按钮**************
@@ -943,13 +943,15 @@ static NSString *const memberIdentifier = @"memberIdentifier";
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-    WEAK_SELF;
-    [XWAFNetworkTool getUrl:self.lyricURL body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-        STRONG_SELF;
+//    WEAK_SELF;
+//    [XWAFNetworkTool getUrl:self.lyricURL body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+//        STRONG_SELF;
 //        NSLog(@"%@", resposeObject);
        
-        NSString *lyric = [[NSString alloc] initWithData:resposeObject encoding:NSUTF8StringEncoding];
+//        NSString *lyric = [[NSString alloc] initWithData:resposeObject encoding:NSUTF8StringEncoding];
         
+    NSString *lyric = @"afdasdfa~sadfa~";
+    
         self.lyricFrameModel.lyric = [lyric stringByReplacingOccurrencesOfString:@"-" withString:@"～"];
         
         self.curretnLyric = [self.lyricFrameModel.lyricStrArray firstObject];
@@ -966,16 +968,16 @@ static NSString *const memberIdentifier = @"memberIdentifier";
         [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         [self getCommentsData];
         
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@", error);
-        if (error.code == -1001) {
-//            [MBProgressHUD showError:@"网络不给力"];
-            [KVNProgress showErrorWithStatus:@"网络不给力"];
-        } else {
-//            [MBProgressHUD showError:@"服务器开小差了"];
-            [KVNProgress showErrorWithStatus:@"服务器开小差了"];
-        }
-    }];
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        NSLog(@"%@", error);
+//        if (error.code == -1001) {
+////            [MBProgressHUD showError:@"网络不给力"];
+//            [KVNProgress showErrorWithStatus:@"网络不给力"];
+//        } else {
+////            [MBProgressHUD showError:@"服务器开小差了"];
+//            [KVNProgress showErrorWithStatus:@"服务器开小差了"];
+//        }
+//    }];
 }
 
 #pragma mark - ***************获取礼物信息***************
@@ -2766,13 +2768,13 @@ static int i = 0;
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-    NSString *getMidiUrl = [NSString stringWithFormat:GET_MIDI_FILE, self.songCode];
-    WEAK_SELF;
-    [XWAFNetworkTool getUrl:getMidiUrl body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-        STRONG_SELF;
+//    NSString *getMidiUrl = [NSString stringWithFormat:GET_MIDI_FILE, self.songCode];
+//    WEAK_SELF;
+//    [XWAFNetworkTool getUrl:getMidiUrl body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+//        STRONG_SELF;
         if (self.shouldPlay) {
             
-            [self.midiParserManager parserMidi:resposeObject lyricContent:nil];
+//            [self.midiParserManager parserMidi:resposeObject lyricContent:nil];
             
             [self.musicPlayer playWithUrl:self.soundURL];
             self.isPlaying = YES;
@@ -2780,11 +2782,11 @@ static int i = 0;
   
             [self getTimeAndProgeress];
         }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"midi数据错误%@", error.description);
-        STRONG_SELF;
-        [self tryToRequestXianQuMid];
-    }];
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        NSLog(@"midi数据错误%@", error.description);
+//        STRONG_SELF;
+//        [self tryToRequestXianQuMid];
+//    }];
 }
 
 #define XIANQU_MID  @"http://1.117.109.129/core/music/zouyin_mid/%@.mid"

@@ -9,7 +9,7 @@
 #import "PersonBaseController.h"
 #import "UIView+Common.h"
 #import "SettingViewController.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "XieciViewController.h"
 #import "PersonFocusBtn.h"
 #import "NavLeftButton.h"

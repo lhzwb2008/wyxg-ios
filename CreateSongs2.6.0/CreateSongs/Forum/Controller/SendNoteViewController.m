@@ -15,7 +15,7 @@
 #import "KeychainItemWrapper.h"
 #import <Security/Security.h>
 #import "AXGMessage.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "NavLeftButton.h"
 #import "NavRightButton.h"
 #import "SongModel.h"

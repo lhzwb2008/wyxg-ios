@@ -15,7 +15,7 @@
 #import "AXGMixer.h"
 #import "lame.h"
 #import "SongLoadingView.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "KVNProgress.h"
 #import "AFNetworking.h"
 #import "AXGHeader.h"

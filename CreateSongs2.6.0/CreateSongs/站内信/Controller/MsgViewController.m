@@ -18,7 +18,7 @@
 #import "SongModel.h"
 #import "AppDelegate.h"
 #import "OtherPersonCenterController.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 
 static NSString *const tableViewIdentifier = @"tableViewIdentifier";
 

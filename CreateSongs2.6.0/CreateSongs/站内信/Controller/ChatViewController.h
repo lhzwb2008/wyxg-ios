@@ -1,21 +1,21 @@
+////
+////  ChatViewController.h
+////  CreateSongs
+////
+////  Created by 爱写歌 on 16/8/31.
+////  Copyright © 2016年 AXG. All rights reserved.
+////
 //
-//  ChatViewController.h
-//  CreateSongs
+//#import "EaseMessageViewController.h"
 //
-//  Created by 爱写歌 on 16/8/31.
-//  Copyright © 2016年 AXG. All rights reserved.
+//@interface ChatViewController : EaseMessageViewController
 //
-
-#import "EaseMessageViewController.h"
-
-@interface ChatViewController : EaseMessageViewController
-
-@property (nonatomic, copy) NSString *leftNameFromSuper;
-
-@property (nonatomic, copy) NSString *leftHeadImgFromSuper;
-
-//@property (nonatomic, copy) NSString *rightNameFromSuper;
-
-@property (nonatomic, copy) NSString *rightHeadImgFromSuper;
-
-@end
+//@property (nonatomic, copy) NSString *leftNameFromSuper;
+//
+//@property (nonatomic, copy) NSString *leftHeadImgFromSuper;
+//
+////@property (nonatomic, copy) NSString *rightNameFromSuper;
+//
+//@property (nonatomic, copy) NSString *rightHeadImgFromSuper;
+//
+//@end

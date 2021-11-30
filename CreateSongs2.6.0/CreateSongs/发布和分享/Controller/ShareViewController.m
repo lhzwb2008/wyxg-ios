@@ -9,14 +9,14 @@
 #import "ShareViewController.h"
 #import "AXGHeader.h"
 #import "AppDelegate.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "WXApi.h"
-#import "UMSocial.h"
+#import <UMShare/UMShare.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterfaceObject.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AFNetworking.h"
 #import "KeychainItemWrapper.h"
 #import <Security/Security.h>
@@ -26,7 +26,7 @@
 #import "ShareButton.h"
 #import "UserModel.h"
 
-@interface ShareViewController ()<WXApiDelegate, UMSocialUIDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate>
+@interface ShareViewController ()<WXApiDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIView *shareView;
 @property (nonatomic, strong) UIView *shareMaskView;
@@ -577,11 +577,10 @@
     req.message = message;
     req.scene = WXSceneSession;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
     
     AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     myAppDelegate.ShareType = wxShare;
-    
 }
 
 // 朋友圈分享按钮
@@ -625,7 +624,7 @@
     req.message = message;
     req.scene = WXSceneTimeline;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
     
     AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     myAppDelegate.ShareType = wxFriend;
@@ -732,17 +731,16 @@
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-    
-    
-    [[UMSocialDataService defaultDataService] postSNSWithTypes:@[UMShareToSina] content:self.webUrl image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            NSLog(@"分享成功");
-            AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            myAppDelegate.willShowShareToast = YES;
-            [MobClick event:@"play_weiboShareSuccess"];
-        }
+    UMSocialMessageObject *messageObject =[UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.songTitle descr:self.songWriter thumImage:[UIImage imageNamed:@"shareIcon"]];
+    shareObject.webpageUrl = self.webUrl;
+    messageObject.shareObject = shareObject;
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Sina messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+        NSLog(@"分享成功");
+        AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        myAppDelegate.willShowShareToast = YES;
+        [MobClick event:@"play_weiboShareSuccess"];
     }];
-    
 }
 
 // 复制链接
@@ -751,22 +749,6 @@
     pasteboard.string = self.webUrl;
     
     [MBProgressHUD showSuccess:@"已复制的剪贴板"];
-}
-
--(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response {
-    if (response.responseCode == UMSResponseCodeSuccess) {
-        
-    }
-}
-
--(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
-{
-    if (platformName == UMShareToSina) {
-        socialData.shareText = @"分享到新浪微博的文字内容";
-    }
-    else{
-        socialData.shareText = @"分享到其他平台的文字内容";
-    }
 }
 
 - (void)didReceiveMemoryWarning {
