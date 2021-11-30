@@ -14,7 +14,8 @@ target 'CreateSongs' do
   pod 'UMShare/Social/QQ'
   pod 'mob_smssdk'
   pod 'EaseMobSDK', :git => 'https://github.com/easemob/sdk-ios-cocoapods.git'
-
+  pod 'MOBFoundation', :path => '../LocalSpecs/MOBFoundation'
+  
   target 'CreateSongsTests' do
     inherit! :search_paths
     # Pods for testing
