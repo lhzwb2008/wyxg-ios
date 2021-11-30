@@ -36,7 +36,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    //http://service.woyaoxiege.com/core/home/data/getZuixin?start=0&end=5
+    //http://1.117.109.129/core/home/data/getZuixin?start=0&end=5
     WorkCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.indentifier forIndexPath:indexPath];
     cell.indexPath = indexPath;
 

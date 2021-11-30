@@ -319,13 +319,6 @@
 
 -(void)disappear {
     [self.sendTextView resignFirstResponder];
-//    self.sendTextView.text = @"";
-//    [self textViewDidChange:self.sendTextView];
-    
-    
-//    [self.tapView removeFromSuperview];
-//    self.tapView = nil;
-//    [self removeFromSuperview];
 }
 
 -(void)setContentSizeBlock:(ContentSizeBlock)block {

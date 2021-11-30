@@ -1,0 +1,13 @@
+Pods/
+build-app/
+build.log/
+xcuserdata/
+*.xcuserstate
+*.xcscheme
+*.lock
+cert_prov_path/
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride

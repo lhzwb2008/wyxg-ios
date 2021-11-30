@@ -98,17 +98,17 @@
 }
 
 + (void)payByWEchatWithOrder:(WXOrder *)wxOrder {
-    PayReq *request = [[PayReq alloc] init];
-    request.partnerId = wxOrder.partnerId;
-    request.prepayId = wxOrder.prepayId;
-    request.nonceStr = wxOrder.nonceStr;
-    request.timeStamp = wxOrder.timeStamp;
-    request.package = wxOrder.package;
-    request.sign = wxOrder.sign;
-    
-    if (![WXApi sendReq:request]) {
+//    PayReq *request = [[PayReq alloc] init];
+//    request.partnerId = wxOrder.partnerId;
+//    request.prepayId = wxOrder.prepayId;
+//    request.nonceStr = wxOrder.nonceStr;
+//    request.timeStamp = wxOrder.timeStamp;
+//    request.package = wxOrder.package;
+//    request.sign = wxOrder.sign;
+//
+//    if (![WXApi sendReq:request]) {
         NSLog(@"支付失败");
-    }
+//    }
 }
 
 @end

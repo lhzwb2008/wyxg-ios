@@ -13,7 +13,7 @@
 #define BANZOU_TAG  101
 #define RECODER_TAG 102
 #define XUANLV_TAG  103
-#define ZOUYIN_URL  @"https://service.woyaoxiege.com/core/home/index/template"
+#define ZOUYIN_URL  @"http://1.117.109.129/core/home/index/template"
 @interface XianQuShiTingViewController () {
     SongLoadingView *songLoading;
 }
@@ -93,7 +93,7 @@
         self.webUrl = dic[@"fenxiang"];
         NSArray *tmpArr = [self.webUrl componentsSeparatedByString:@"/"];
         self.changeSingerAPIName = [tmpArr lastObject];
-        //http://service.woyaoxiege.com/music/mp3/badc2dbc8cf1beb0349ca615d843b57b_1.mp3
+        //http://1.117.109.129/core/music/mp3/badc2dbc8cf1beb0349ca615d843b57b_1.mp3
         [self.customProgressView setProgress:0 withAnimated:NO];
         [self.player playWithUrl:self.mp3Url];
         [self getRow];
@@ -113,7 +113,7 @@
         self.webUrl = dic[@"fenxiang"];
         NSArray *tmpArr = [self.webUrl componentsSeparatedByString:@"/"];
         self.changeSingerAPIName = [tmpArr lastObject];
-        //http://service.woyaoxiege.com/music/mp3/badc2dbc8cf1beb0349ca615d843b57b_1.mp3
+        //http://1.117.109.129/core/music/mp3/badc2dbc8cf1beb0349ca615d843b57b_1.mp3
         [self.customProgressView setProgress:0 withAnimated:NO];
         [self.player playWithUrl:self.mp3Url];
         [self.player setVolume:1.0f];

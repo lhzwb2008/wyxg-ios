@@ -8,12 +8,13 @@
 
 #import "ForumWebViewController.h"
 #import "AXGHeader.h"
+#import <WebKit/WebKit.h>
 
-@interface ForumWebViewController ()<UIWebViewDelegate>
+@interface ForumWebViewController ()
 
 @property (nonatomic, strong) UIView *navView;
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
@@ -43,9 +44,8 @@
 //}
 
 - (void)createWebView {
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, self.view.width, self.view.height - 44)];
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 44, self.view.width, self.view.height - 44)];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    self.webView.delegate = self;
     [self.view addSubview:self.webView];
 }
 
@@ -57,24 +57,10 @@
     
 }
 
-#pragma mark - webViewDelegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    self.navTitle.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 
 @interface BaseViewController ()
 
@@ -42,7 +42,15 @@
 #pragma mark - 初始化界面
 - (void)initNavView {
     
-    self.navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    CGFloat fakeH = kDevice_Is_iPhoneX ? 24 : 0;
+    
+    UIView *fakeView = [UIView new];
+    fakeView.frame = CGRectMake(0, 0, SCREEN_W, fakeH);
+    fakeView.backgroundColor = HexStringColor(@"#FFDC74");
+    [self.view addSubview:fakeView];
+    self.navFakeView = fakeView;
+    
+    self.navView = [[UIView alloc] initWithFrame:CGRectMake(0, fakeView.bottom, self.view.width, 64)];
     [self.view addSubview:self.navView];
     self.navView.backgroundColor = HexStringColor(@"#FFDC74");
     

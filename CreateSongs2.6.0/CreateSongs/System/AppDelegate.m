@@ -23,21 +23,21 @@
 #import "SuggestViewController.h"
 #import "DraftsViewController.h"
 #import "ForumViewController.h"
-#import "UMSocial.h"
+#import <UMShare/UMShare.h>
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "WXApi.h"
 #import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/TencentOAuthObject.h>
-#import <TencentOpenAPI/TencentApiInterface.h>
+//#import <TencentOpenAPI/TencentOAuthObject.h>
+//#import <TencentOpenAPI/TencentApiInterface.h>
 #import "WeiboSDK.h"
-#import "UMSocialSinaSSOHandler.h"
+//#import "UMSocialSinaSSOHandler.h"
 #import "UMSocialSinaHandler.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "LoginViewController.h"
 #import "ModifyViewController.h"
-#import "UMessage.h"
+//#import "UMessage.h"
 #import "AXGCache.h"
 #import "TYCache.h"
 #import "CreateSongs-Swift.h"
@@ -45,18 +45,19 @@
 #import "XMidiPlayer.h"
 #import "VoiceSettingController.h"
 #import "MBProgressHUD.h"
-#import "EMSDK.h"
-#import "EaseUI.h"
+//#import "EMSDK.h"
+//#import "EaseUI.h"
 //#import "AppDelegate+EaseMob.h"
 #import "AXGStartView.h"
 #import "LOGIN.h"
 //#import "Growing.h"
 //#import <JSPatch/JSPatch.h>
+#import <WebKit/WebKit.h>
 
 #define app_key @"114044c49bfa0"
 #define app_secrect @"e7e4c85c029be4a44944a9415c03ad06"
 
-@interface AppDelegate ()<WXApiDelegate, TencentSessionDelegate, QQApiInterfaceDelegate, WeiboSDKDelegate, EMChatManagerDelegate>
+@interface AppDelegate ()<WXApiDelegate, TencentSessionDelegate, WeiboSDKDelegate>
 
 @end
 
@@ -82,71 +83,38 @@
     
     [self configAudioSettingWithOptions:launchOptions];
     
-    [self configHXWithApplication:application Options:launchOptions];
+//    [self configHXWithApplication:application Options:launchOptions];
     
     [self configWindowRootViewsWithOptions:launchOptions];
     
-    if (![self introduceShowed] || ![LOGIN isLogin]) {
-        [self configIntroduceController];
-    }
-    AXGStartView *startView = [AXGStartView startView];
-    WEAK_SELF;
-    [startView startAnimationWithCompletionBlock:^(AXGStartView *easeStartView) {
-        STRONG_SELF;
-        [self completionStartAnimationWithApplication:application Options:launchOptions];
-    }];
+//    if (![self introduceShowed] || ![LOGIN isLogin]) {
+//        [self configIntroduceController];
+//    }
+//    AXGStartView *startView = [AXGStartView startView];
+//    WEAK_SELF;
+//    [startView startAnimationWithCompletionBlock:^(AXGStartView *easeStartView) {
+//        STRONG_SELF;
+//        [self completionStartAnimationWithApplication:application Options:launchOptions];
+//    }];
     return YES;
 }
 
-//- (void)configJSPath {
-//    [JSPatch startWithAppKey:@"658b0a5c17202c8e"];
-//    
-//    //用来检测回调的状态，是更新或者是执行脚本之类的，相关信息，会打印在你的控制台
-//    [JSPatch setupCallback:^(JPCallbackType type, NSDictionary *data, NSError *error) {
-//        
-//        NSLog(@"error-->%@",error);
-//        switch (type) {
-//            case JPCallbackTypeUpdate: {
-//                NSLog(@"更新脚本 %@ %@", data, error);
-//                break;
-//            }
-//            case JPCallbackTypeRunScript: {
-//                NSLog(@"执行脚本 %@ %@", data, error);
-//                break;
-//            }
-//            case JPCallbackTypeCondition: {
-//                NSLog(@"条件下发 %@ %@", data, error);
-//                break;
-//            }
-//            case JPCallbackTypeGray: {
-//                NSLog(@"灰度下发 %@ %@", data, error);
-//                break;
-//            }
-//            default:
-//                break;
-//        }
-//    }];
-//#ifdef DEBUG
-//    [JSPatch setupDevelopment];
-//#endif
-//    [JSPatch sync];
-//}
 
 - (void)configHXWithApplication:(UIApplication *)application Options:(NSDictionary *)launchOptions {
     /****************************环信注册*****************************/
-    //AppKey:注册的AppKey，详细见下面注释。
-    //apnsCertName:推送证书名（不需要加后缀），详细见下面注释。
-    EMOptions *options = [EMOptions optionsWithAppkey:@"20160830#woyaoxiege"];
-    options.apnsCertName = @"";
-    [[EMClient sharedClient] initializeSDKWithOptions:options];
-    
-    //    [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions appkey:@"20160830#woyaoxiege" apnsCertName:@"" otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
-    
-    [[EaseSDKHelper shareHelper] hyphenateApplication:application
-                        didFinishLaunchingWithOptions:launchOptions
-                                               appkey:@"20160830#woyaoxiege"
-                                         apnsCertName:@""
-                                          otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
+//    //AppKey:注册的AppKey，详细见下面注释。
+//    //apnsCertName:推送证书名（不需要加后缀），详细见下面注释。
+//    EMOptions *options = [EMOptions optionsWithAppkey:@"20160830#woyaoxiege"];
+//    options.apnsCertName = @"";
+//    [[EMClient sharedClient] initializeSDKWithOptions:options];
+//
+//    //    [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions appkey:@"20160830#woyaoxiege" apnsCertName:@"" otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
+//
+//    [[EaseSDKHelper shareHelper] hyphenateApplication:application
+//                        didFinishLaunchingWithOptions:launchOptions
+//                                               appkey:@"20160830#woyaoxiege"
+//                                         apnsCertName:@""
+//                                          otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     
     [self loginIM];
 
@@ -173,17 +141,18 @@
     
     // 更改UA
     //get the original user-agent of webview
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    NSLog(@"old agent :%@", oldAgent);
-    
-    //add my info to the new agent
-    NSString *newAgent = [NSString stringWithFormat:@"app=wyxg%@", oldAgent];
-    NSLog(@"new agent :%@", newAgent);
-    
-    //regist the new agent
-    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newAgent, @"UserAgent", nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+    [webView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(NSString *oldAgent, NSError * _Nullable error) {
+        NSLog(@"old agent :%@", oldAgent);
+        
+        //add my info to the new agent
+        NSString *newAgent = [NSString stringWithFormat:@"app=wyxg%@", oldAgent];
+        NSLog(@"new agent :%@", newAgent);
+        
+        //regist the new agent
+        NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newAgent, @"UserAgent", nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    }];
     
     /***************************初始化界面****************************/
     HomeViewController *mainHomeVC = [[HomeViewController alloc] init];
@@ -225,7 +194,7 @@
     self.safariString = @"";
     
    
-    [UMSocialData setAppKey:@"56d565cae0f55a7eb6000776"];
+//    [UMSocialData setAppKey:@"56d565cae0f55a7eb6000776"];
     
     self.rankDataShouldRefresh = YES;
     self.song_tag = @"";
@@ -240,8 +209,8 @@
     
     /******************************推送*******************************/
     // 友盟推送
-    [UMessage startWithAppkey:@"56d565cae0f55a7eb6000776" launchOptions:launchOptions];
-    [UMessage setLogEnabled:YES];
+//    [UMessage startWithAppkey:@"56d565cae0f55a7eb6000776" launchOptions:launchOptions];
+//    [UMessage setLogEnabled:YES];
     
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
@@ -271,24 +240,24 @@
         [categorys setActions:@[action1,action2]forContext:(UIUserNotificationActionContextDefault)];
         
         UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:[NSSet setWithObject:categorys]];
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+//        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
     }else{
         //注册消息推送类型
-        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+//        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
     }
 #else
-    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
+//    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
 #endif
     
     
     /***************************各渠道分享注册****************************/
     
-    [WXApi registerApp:@"wxab1c2b71c7ff40c6"];
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3428038518"
-                                              secret:@"a7c9598725dc82e3d53334185a5adb20"
-                                         RedirectURL:@"https://api.weibo.com/oauth2/default.html"];
-    TencentOAuth *tencent = [[TencentOAuth alloc] initWithAppId:@"1104985545" andDelegate:self];
-    [WeiboSDK registerApp:@"3428038518"];
+//    [WXApi registerApp:@"wxab1c2b71c7ff40c6"];
+//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3428038518"
+//                                              secret:@"a7c9598725dc82e3d53334185a5adb20"
+//                                         RedirectURL:@"https://api.weibo.com/oauth2/default.html"];
+//    TencentOAuth *tencent = [[TencentOAuth alloc] initWithAppId:@"1104985545" andDelegate:self];
+//    [WeiboSDK registerApp:@"3428038518"];
     
     if ([WeiboSDK isWeiboAppInstalled]) {
         self.weiboInstall = YES;
@@ -308,10 +277,10 @@
     if ([TencentOAuth iphoneQQInstalled]) {
         self.QQIsInstall = YES;
     }
-    self.QQIsInstall = [TencentOAuth iphoneQQInstalled] && [TencentOAuth iphoneQQSupportSSOLogin];
+//    self.QQIsInstall = [TencentOAuth iphoneQQInstalled] && [TencentOAuth iphoneQQSupportSSOLogin];
     
     /***************************短信验证码****************************/
-    [SMSSDK registerApp:app_key withSecret:app_secrect];
+//    [SMSSDK registerApp:app_key withSecret:app_secrect];
     
     /***************************友盟设置版本号/GrowingIO注册****************************/
     
@@ -327,10 +296,10 @@
         NSLog(@"%s", name);
     }
     
-    [MobClick startWithAppkey:@"56d565cae0f55a7eb6000776" reportPolicy:BATCH   channelId:@""];
+//    [MobClick startWithAppkey:@"56d565cae0f55a7eb6000776" reportPolicy:BATCH   channelId:@""];
     
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
+//    [MobClick setAppVersion:version];
     
     // 新版本清理缓存
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"appCacheVersion"] isEqualToString:version]) {
@@ -350,238 +319,24 @@
         KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
         NSString *userId = [wrapper objectForKey:(id)kSecValueData];
         
-        [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
-        
-        // 登录
-        BOOL isAutoLogin = [EMClient sharedClient].options.isAutoLogin;
-        if (!isAutoLogin) {
-            EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
-            if (!error) {
-                NSLog(@"登录成功");
-                [[EMClient sharedClient].options setIsAutoLogin:YES];
-            } else {
-                NSLog(@"登录失败 %@", error.description);
-            }
-        }
-        
+//        [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+//
+//        // 登录
+//        BOOL isAutoLogin = [EMClient sharedClient].options.isAutoLogin;
+//        if (!isAutoLogin) {
+//            EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
+//            if (!error) {
+//                NSLog(@"登录成功");
+//                [[EMClient sharedClient].options setIsAutoLogin:YES];
+//            } else {
+//                NSLog(@"登录失败 %@", error.description);
+//            }
+//        }
     }
-    
 }
 
 #pragma mark - notification
 
-//// 改变根视图的通知方法
-//- (void)changeDrawerRoot:(NSNotification *)message {
-//
-//    if ([message.object isEqualToString:@"首页"]) {
-//        // 我要写歌
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:DRAWER_LOCATION_HOME forKey:DRAWER_LOCATION];
-//        
-//        if ([self.drawController.centerViewController isKindOfClass:[HomeViewController class]]) {
-//            // 收回抽屉
-//        } else {
-//            HomeViewController *mainHomeVC = [[HomeViewController alloc] init];
-//            CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-//            [nav setNavigationBarHidden:YES];
-//            //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-////            mainHomeVC.drawerVC = mvc;
-//            
-//            [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-//                
-//            }];
-//            [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-//
-//            self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-//            self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//            
-//        }
-//        
-//    } else if ([message.object isEqualToString:@"建议"]) {
-//        // 意见反馈
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:DRAWER_LOCATION_SUGGEST forKey:DRAWER_LOCATION];
-//        
-//        if ([self.drawController.centerViewController isKindOfClass:[SuggestViewController class]]) {
-//            // 收回抽屉
-//        } else {
-//            SuggestViewController *mainHomeVC = [[SuggestViewController alloc] init];
-//            CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-//            [nav setNavigationBarHidden:YES];
-//            //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-////            mainHomeVC.drawerVC = mvc;
-//            
-//            [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-//                
-//            }];
-//            [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-//            
-//            self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-//            self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//            
-//        }
-//        
-//    } else if ([message.object isEqualToString:@"草稿"]) {
-//        
-//        // 草稿箱
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:DRAWER_LOCATION_DRAFTS forKey:DRAWER_LOCATION];
-//        
-//        if ([self.drawController.centerViewController isKindOfClass:[DraftsViewController class]]) {
-//            // 收回抽屉
-//        } else {
-//            DraftsViewController *mainHomeVC = [[DraftsViewController alloc] init];
-//            CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-//            [nav setNavigationBarHidden:YES];
-//            //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-////            mainHomeVC.drawerVC = mvc;
-//            
-//            [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-//                
-//            }];
-//            [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-//            
-//            self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-//            self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//        }
-//        
-//    } else if ([message.object isEqualToString:@"个人"]) {
-//        
-//        // 个人中心
-//        [[NSUserDefaults standardUserDefaults] setObject:DRAWER_LOCATION_PERSON forKey:DRAWER_LOCATION];
-//        
-//        if (![XWAFNetworkTool checkNetwork]) {
-//            //            [MBProgressHUD showError:@"网络不给力"];
-//            [KVNProgress showErrorWithStatus:@"网络不给力"];
-//            
-//            return;
-//        }
-//        
-//        if ([self.drawController.centerViewController isKindOfClass:[PersonCenterController class]]) {
-//            // 收回抽屉
-//        } else {
-//            
-//            if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
-//                
-//                PersonCenterController *mainHomeVC = [[PersonCenterController alloc] init];
-//                CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-//                [nav setNavigationBarHidden:YES];
-//                //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-//                //                mainHomeVC.drawerVC = mvc;
-//                
-//                [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-//                    
-//                }];
-//                [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-//                
-//                self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-//                self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//                
-//            } else {
-//                AXG_LOGIN(LOGIN_LOCATION_PERSON);
-//            }
-//            
-//        }
-//        
-//    } else if ([message.object isEqualToString:@"乐谈"]) {
-//        
-//        // 草稿箱
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:DRAWER_LOCATION_DRAFTS forKey:DRAWER_LOCATION];
-//        
-//        if ([self.drawController.centerViewController isKindOfClass:[ForumViewController class]]) {
-//            // 收回抽屉
-//        } else {
-//            ForumViewController *mainHomeVC = [[ForumViewController alloc] init];
-//            CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-//            [nav setNavigationBarHidden:YES];
-//            //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-////            mainHomeVC.drawerVC = mvc;
-//            
-//            [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-//                
-//            }];
-//            [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-//            
-//            self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-//            self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//        }
-//        
-//    } else if ([message.object isEqualToString:@"头像"]) {
-//        
-//        // 头像
-//        [[NSUserDefaults standardUserDefaults] setObject:DRAWER_LOCATION_HEAD forKey:DRAWER_LOCATION];
-//    
-//        if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
-//            
-//            ModifyViewController *mainHomeVC = [[ModifyViewController alloc] init];
-//            mainHomeVC.fromDrawer = YES;
-//            CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-//            [nav setNavigationBarHidden:YES];
-//            //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-//            //            mainHomeVC.drawerVC = mvc;
-//            
-//            [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-//                
-//            }];
-//            [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-//            
-//            self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-//            self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//            
-//        } else {
-//
-//            AXG_LOGIN(LOGIN_LOCATION_DRAWER);
-//        }
-//        
-//        
-////        if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
-////            
-////            if (![XWAFNetworkTool checkNetwork]) {
-////                //            [MBProgressHUD showError:@"网络不给力"];
-////                [KVNProgress showErrorWithStatus:@"网络不给力"];
-////                
-////                return;
-////            }
-////            
-////            if ([self.drawController.centerViewController isKindOfClass:[RegisterViewController class]]) {
-////                // 收回抽屉
-////            } else {
-////                RegisterViewController *mainHomeVC = [[RegisterViewController alloc] init];
-////                mainHomeVC.fromType = fromHome;
-////                CustomNaviController *nav = [[CustomNaviController alloc] initWithRootViewController:mainHomeVC];
-////                [nav setNavigationBarHidden:YES];
-////                //            AXGMyViewController *mvc = [[AXGMyViewController alloc] init];
-////                mainHomeVC.myViewController = mvc;
-////                
-////                [self.drawController setCenterViewController:nav withCloseAnimation:YES completion:^(BOOL finished) {
-////                    
-////                }];
-////                [self.drawController setLeftDrawerViewController:self.drawController.leftDrawerViewController];
-////                
-////                self.drawController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
-////                self.drawController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-////            }
-////            
-////        } else {
-////            
-////            UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-////            
-////            MessageIdentifyViewController *messageVC = [[MessageIdentifyViewController alloc] init];
-////            
-////            if (message.userInfo[COMMENT_NOTI_INFO]) {
-////                messageVC.isFromComment = YES;
-////            } else {
-////                messageVC.isFromComment = NO;
-////            }
-////            [window.rootViewController presentViewController:messageVC animated:YES completion:^{
-////                
-////            }];
-////        }
-//        
-//    }
-//    
-//}
 
 #pragma mark - 分享回调
 - (void)tencentDidLogin {
@@ -671,8 +426,7 @@
     
     self.isLaunchedBySafari = NO;
     self.safariString = @"";
-
-    return [WeiboSDK handleOpenURL:url delegate:self] || [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:self] || [UMSocialSnsService handleOpenURL:url];
+    return [WeiboSDK handleOpenURL:url delegate:self] || [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:self] || [[UMSocialManager defaultManager] handleOpenURL:url];
     
 //    return [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:self] || [UMSocialSnsService handleOpenURL:url];
     
@@ -720,22 +474,24 @@
         } else if (resp.errCode == -4) {
             NSLog(@"授权失败");
         }
-    } else if([resp isKindOfClass:[PayResp class]]) {
-        
-        NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
-        
-        switch (resp.errCode) {
-            case WXSuccess:
-                strMsg = @"支付结果：成功！";
-                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
-                
-                break;
-            default:
-                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
-                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
-                break;
-        }
     }
+    
+//    else if([resp isKindOfClass:[PayResp class]]) {
+//
+//        NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
+//
+//        switch (resp.errCode) {
+//            case WXSuccess:
+//                strMsg = @"支付结果：成功！";
+//                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+//
+//                break;
+//            default:
+//                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+//                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+//                break;
+//        }
+//    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -744,7 +500,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [UMessage didReceiveRemoteNotification:userInfo];
+//    [UMessage didReceiveRemoteNotification:userInfo];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enterAppFromPushNotification" object:userInfo];
     
@@ -761,7 +517,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationBackGround" object:nil];
     
     // 环信
-    [[EMClient sharedClient] applicationDidEnterBackground:application];
+//    [[EMClient sharedClient] applicationDidEnterBackground:application];
     
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -770,14 +526,14 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
     // 环信
-    [[EMClient sharedClient] applicationWillEnterForeground:application];
+//    [[EMClient sharedClient] applicationWillEnterForeground:application];
     
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
-    [UMSocialSnsService  applicationDidBecomeActive];
+//    [UMSocialSnsService  applicationDidBecomeActive];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationActive" object:nil];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.

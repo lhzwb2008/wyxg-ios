@@ -43,7 +43,7 @@
 #import <Security/Security.h>
 #import "OtherPersonCenterController.h"
 #import "AppDelegate.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AXGCache.h"
 #import "TianciViewController.h"
 #import "XuanQuController.h"
@@ -56,7 +56,7 @@
 #import "HomeActivityDelegate.h"
 #import "SearchViewController.h"
 #import "MBProgressHUD.h"
-#import "EMSDK.h"
+//#import "EMSDK.h"
 #import "ForumViewController.h"
 #import "AXGMediator+MediatorModuleAActions.h"
 #import "NSString+Common.h"
@@ -238,6 +238,7 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
 //    [self gettouxiang];
     
     [self.view bringSubviewToFront:self.navView];
+    [self.view bringSubviewToFront:self.navFakeView];
     
     [self createBottomButton];
     [self createEdgePanView];
@@ -347,8 +348,8 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
     
     self.centerX1 = self.recommandLabel.centerX;
     self.centerX2 = self.latestLabel.centerX;
-    
-    self.titleSlider = [[UIView alloc] initWithFrame:CGRectMake(0, 64 - 2, width, 2)];
+
+    self.titleSlider = [[UIView alloc] initWithFrame:CGRectMake(0, self.navView.height - 2, width, 2)];
     [self.navView addSubview:self.titleSlider];
     self.titleSlider.center = CGPointMake(self.recommandLabel.centerX, self.titleSlider.centerY);
     self.titleSlider.backgroundColor = HexStringColor(@"#441D11");
@@ -2002,8 +2003,8 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
 // 推到用户歌曲界面
 - (void)pushToUserSongVC:(id)cell {
     
-//    self.lyricURL = @"http://service.woyaoxiege.com/music/lrc/f5a13eca90cbe22dd8a3c412e941e61e_6.lrc";
-//    self.soundURL = @"http://service.woyaoxiege.com/music/mp3/f5a13eca90cbe22dd8a3c412e941e61e_6.mp3";
+//    self.lyricURL = @"http://1.117.109.129/core/music/lrc/f5a13eca90cbe22dd8a3c412e941e61e_6.lrc";
+//    self.soundURL = @"http://1.117.109.129/core/music/mp3/f5a13eca90cbe22dd8a3c412e941e61e_6.mp3";
 //    self.soundName = @"七夕";
 //    self.listenCount = 1234;
 //    self.user_id = @"20590";
@@ -2366,57 +2367,57 @@ static NSString *const homeActivtyIdentifier = @"homeActivtyIdentifier";
 // 刷新站内信数据
 - (void)reloadMsg {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNewMessage) name:@"didReceiveMessage" object:nil];
-    
-    NSMutableArray *mutaArr = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
-        
-        NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
-        NSInteger unreadCount = 0;
-        for (EMConversation *conversation in conversations) {
-            unreadCount += conversation.unreadMessagesCount;
-        }
-        
-        if (unreadCount != 0) {
-            self.msgView.hidden = NO;
-        } else {
-            //     获取用户id
-            KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
-            NSString *userId = [wrapper objectForKey:(id)kSecValueData];
-            
-            WEAK_SELF;
-            [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_MESSAGE, userId] body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-                NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:resposeObject options:0 error:nil];
-                STRONG_SELF;
-                if ([dic1[@"status"] isEqualToNumber:@0]) {
-                    NSArray *array = dic1[@"items"];
-                    
-                    for (NSDictionary *dic in array) {
-                        if ([dic[@"is_read"] isEqualToString:@"1"]) {
-                            
-                        } else {
-                            [mutaArr addObject:dic];
-                        }
-                    }
-                    
-                    if (mutaArr.count != 0) {
-                        self.msgView.hidden = NO;
-                    } else {
-                        self.msgView.hidden = YES;
-                    }
-                    
-                } else {
-                    self.msgView.hidden = YES;
-                }
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                self.msgView.hidden = YES;
-            }];
-        }
-        
-    } else {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNewMessage) name:@"didReceiveMessage" object:nil];
+//
+//    NSMutableArray *mutaArr = [[NSMutableArray alloc] initWithCapacity:0];
+//
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
+//
+//        NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+//        NSInteger unreadCount = 0;
+//        for (EMConversation *conversation in conversations) {
+//            unreadCount += conversation.unreadMessagesCount;
+//        }
+//
+//        if (unreadCount != 0) {
+//            self.msgView.hidden = NO;
+//        } else {
+//            //     获取用户id
+//            KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
+//            NSString *userId = [wrapper objectForKey:(id)kSecValueData];
+//
+//            WEAK_SELF;
+//            [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_MESSAGE, userId] body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+//                NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:resposeObject options:0 error:nil];
+//                STRONG_SELF;
+//                if ([dic1[@"status"] isEqualToNumber:@0]) {
+//                    NSArray *array = dic1[@"items"];
+//
+//                    for (NSDictionary *dic in array) {
+//                        if ([dic[@"is_read"] isEqualToString:@"1"]) {
+//
+//                        } else {
+//                            [mutaArr addObject:dic];
+//                        }
+//                    }
+//
+//                    if (mutaArr.count != 0) {
+//                        self.msgView.hidden = NO;
+//                    } else {
+//                        self.msgView.hidden = YES;
+//                    }
+//
+//                } else {
+//                    self.msgView.hidden = YES;
+//                }
+//            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//                self.msgView.hidden = YES;
+//            }];
+//        }
+//
+//    } else {
         self.msgView.hidden = YES;
-    }
+//    }
     
 }
 

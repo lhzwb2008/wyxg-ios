@@ -36,6 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    LYricFormatSeletView *seletView;
+    
     [self changeSongToEmpty];
 
     self.willPopAlert = YES;
@@ -92,8 +94,8 @@
 
 // 创建选择歌词界面
 - (void)createLyricPickView {
-    
-    self.formatPickView = [[HECollecPicker alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 45 * HEIGHT_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.formatPickView = [[HECollecPicker alloc] initWithFrame:CGRectMake(0, navH, self.view.width, 45 * HEIGHT_NIT)];
     [self.view addSubview:self.formatPickView];
     
     
@@ -273,7 +275,8 @@
 
 // 创建歌词界面
 - (void)createLyricView {
-    self.songs = [[CreateSongs alloc] initWithFrame:CGRectMake(0, 64 + 45 * HEIGHT_NIT, self.view.width, self.view.height - self.navView.height - 45 * HEIGHT_NIT - (50 * WIDTH_NIT))];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.songs = [[CreateSongs alloc] initWithFrame:CGRectMake(0, navH + 45 * HEIGHT_NIT, self.view.width, self.view.height - self.navView.height - 45 * HEIGHT_NIT - (50 * WIDTH_NIT))];
     [self.view addSubview:self.songs];
     
 //    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.songs.bottom, self.view.width, 0.5)];

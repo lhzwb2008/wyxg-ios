@@ -10,6 +10,17 @@
 
 @implementation UIView (UIViewAdditions)
 
++ (BOOL)bottomIsFullScreen {
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets safeAreaBottom = [UIApplication sharedApplication].delegate.window.safeAreaInsets;
+        if (safeAreaBottom.bottom > 0) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
 - (CGFloat)left {
     return self.frame.origin.x;
 }

@@ -133,9 +133,13 @@
     
     lyric = [lyric stringByReplacingOccurrencesOfString:@"-" withString:@"～"];
     
+    if (!(lyric.length > 0)) {
+        return;
+    }
     NSArray *array1 = [lyric componentsSeparatedByString:@":"];
     
     NSString *lyric1 = [array1 lastObject];
+    
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:lyric1];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

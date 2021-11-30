@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "AXGHeader.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "AFNetworking.h"
 #import "MBProgressHUD+MJ.h"
 #import "XWAFNetworkTool.h"
@@ -26,7 +26,7 @@
 #import "AppDelegate.h"
 #import "AXGTools.h"
 #import "AXGMessage.h"
-#import "EMSDK.h"
+//#import "EMSDK.h"
 
 @interface LoginViewController ()<UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, UITextFieldDelegate, PersonViewDelegate, TencentSessionDelegate, WeiboSDKDelegate>
 
@@ -231,129 +231,129 @@
     [protocolButton addTarget:self action:@selector(popProtocolAction) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UILabel *fastLoginLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tongyiLabel.bottom + 30 * HEIGHT_NIT, self.view.width, 12 * WIDTH_NIT)];
-    [self.view addSubview:fastLoginLabel];
-    fastLoginLabel.textAlignment = NSTextAlignmentCenter;
-    fastLoginLabel.textColor = HexStringColor(@"#535353");
-    fastLoginLabel.text = @"第三方账号登录";
-    fastLoginLabel.center = CGPointMake(self.view.width / 2, self.view.height - 146 * HEIGHT_NIT);
-    fastLoginLabel.font = NORML_FONT(12);
-    
-    UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(12.5 * WIDTH_NIT, self.view.height - 146 * HEIGHT_NIT, 120 * WIDTH_NIT, 0.5)];
-    [self.view addSubview:leftLine];
-    leftLine.backgroundColor = HexStringColor(@"#cccccc");
-    
-    UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(self.view.width - 120 * WIDTH_NIT - 12.5 * WIDTH_NIT, self.view.height - 146 * HEIGHT_NIT, 120 * WIDTH_NIT, 0.5)];
-    [self.view addSubview:rightLine];
-    rightLine.backgroundColor = HexStringColor(@"#cccccc");
-    
-    UIImageView *QQImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, fastLoginLabel.bottom + 27 * HEIGHT_NIT, 45 * WIDTH_NIT, 45 * WIDTH_NIT)];
-    [self.view addSubview:QQImage];
-    QQImage.center = CGPointMake(self.view.centerX, leftLine.centerY + (tongyiLabel.centerY - leftLine.centerY) / 2);
-    QQImage.image = [UIImage imageNamed:@"QQ"];
-    
-    UIImageView *weixinImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 45 * WIDTH_NIT, 45 * WIDTH_NIT)];
-    [self.view addSubview:weixinImage];
-    weixinImage.center = CGPointMake(QQImage.centerX - 85 * WIDTH_NIT, QQImage.centerY);
-    weixinImage.image = [UIImage imageNamed:@"微信"];
-    
-    UIImageView *weiboImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 45 * WIDTH_NIT, 45 * WIDTH_NIT)];
-    [self.view addSubview:weiboImage];
-    weiboImage.center = CGPointMake(QQImage.centerX + 85 * WIDTH_NIT, QQImage.centerY);
-    weiboImage.image = [UIImage imageNamed:@"微博"];
-    
-    self.QQLoginButton = [UIButton new];
-    [self.view addSubview:self.QQLoginButton];
-    self.QQLoginButton.frame = CGRectMake(0, 0, 50 * WIDTH_NIT, 50 * WIDTH_NIT);
-    self.QQLoginButton.center = QQImage.center;
-    self.QQLoginButton.tag = 101;
-    [self.QQLoginButton addTarget:self action:@selector(fastLoginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.weiboLoginButton = [UIButton new];
-    [self.view addSubview:self.weiboLoginButton];
-    self.weiboLoginButton.frame = CGRectMake(0, 0, 50 * WIDTH_NIT, 50 * WIDTH_NIT);
-    self.weiboLoginButton.center = weiboImage.center;
-    self.weiboLoginButton.tag = 102;
-    [self.weiboLoginButton addTarget:self action:@selector(fastLoginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.weixinLoginButton = [UIButton new];
-    [self.view addSubview:self.weixinLoginButton];
-    self.weixinLoginButton.frame = CGRectMake(0, 0, 50 * WIDTH_NIT, 50 * WIDTH_NIT);
-    self.weixinLoginButton.center = weixinImage.center;
-    self.weixinLoginButton.tag = 100;
-    [self.weixinLoginButton addTarget:self action:@selector(fastLoginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    CGRect frame1 = weixinImage.frame;
-    CGRect frame2 = QQImage.frame;
-    CGRect frame3 = weiboImage.frame;
-    
-    CGRect buttonFrame1 = self.weixinLoginButton.frame;
-    CGRect buttonFrame2 = self.QQLoginButton.frame;
-    CGRect buttonFrame3 = self.weiboLoginButton.frame;
-    
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
-    #warning remember delete
-        app.wxIsInstall = YES;
-        app.weiboInstall = YES;
-        app.QQIsInstall = YES;
-    
-    if (app.wxIsInstall && app.weiboInstall && app.QQIsInstall) {
-        // 都安装了
-    } else if (app.wxIsInstall && !app.weiboInstall && app.QQIsInstall) {
-        // 微博 未安装
-        self.weiboLoginButton.hidden = YES;
-        weiboImage.hidden = YES;
-        
-    } else if (app.wxIsInstall && app.weiboInstall && !app.QQIsInstall) {
-        // qq 未安装
-        self.QQLoginButton.hidden = YES;
-        QQImage.hidden = YES;
-        self.weiboLoginButton.frame = buttonFrame2;
-        weiboImage.frame = frame2;
-        
-    } else if (!app.wxIsInstall && app.weiboInstall && app.QQIsInstall) {
-        // 微信 未安装
-        self.weixinLoginButton.hidden = YES;
-        weixinImage.hidden = YES;
-        self.QQLoginButton.frame = buttonFrame1;
-        QQImage.frame = frame1;
-        self.weiboLoginButton.frame = buttonFrame2;
-        weiboImage.frame = frame2;
-    } else if (app.wxIsInstall && !app.weiboInstall && !app.QQIsInstall) {
-        // 微博 qq 未安装
-        self.weiboLoginButton.hidden = YES;
-        weiboImage.hidden = YES;
-        self.QQLoginButton.hidden = YES;
-        QQImage.hidden = YES;
-    } else if (!app.wxIsInstall && app.weiboInstall && !app.QQIsInstall) {
-        // 微信 qq 未安装
-        self.weixinLoginButton.hidden = YES;
-        weixinImage.hidden = YES;
-        self.QQLoginButton.hidden = YES;
-        QQImage.hidden = YES;
-        self.weiboLoginButton.frame = buttonFrame1;
-        weiboImage.frame = frame1;
-    } else if (!app.wxIsInstall && !app.weiboInstall && app.QQIsInstall) {
-        // 微信 微博 未安装
-        self.weixinLoginButton.hidden = YES;
-        weixinImage.hidden = YES;
-        self.weiboLoginButton.hidden = YES;
-        weiboImage.hidden = YES;
-        self.QQLoginButton.frame = buttonFrame1;
-        QQImage.frame = frame1;
-    } else if (!app.wxIsInstall && !app.weiboInstall && !app.QQIsInstall) {
-        // 都未安装
-        self.weiboLoginButton.hidden = YES;
-        self.weixinLoginButton.hidden = YES;
-        self.QQLoginButton.hidden = YES;
-        QQImage.hidden = YES;
-        weiboImage.hidden = YES;
-        weixinImage.hidden = YES;
-        fastLoginLabel.hidden = YES;
-        leftLine.hidden = YES;
-        rightLine.hidden = YES;
-    }
+//    UILabel *fastLoginLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tongyiLabel.bottom + 30 * HEIGHT_NIT, self.view.width, 12 * WIDTH_NIT)];
+//    [self.view addSubview:fastLoginLabel];
+//    fastLoginLabel.textAlignment = NSTextAlignmentCenter;
+//    fastLoginLabel.textColor = HexStringColor(@"#535353");
+//    fastLoginLabel.text = @"第三方账号登录";
+//    fastLoginLabel.center = CGPointMake(self.view.width / 2, self.view.height - 146 * HEIGHT_NIT);
+//    fastLoginLabel.font = NORML_FONT(12);
+//
+//    UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(12.5 * WIDTH_NIT, self.view.height - 146 * HEIGHT_NIT, 120 * WIDTH_NIT, 0.5)];
+//    [self.view addSubview:leftLine];
+//    leftLine.backgroundColor = HexStringColor(@"#cccccc");
+//
+//    UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(self.view.width - 120 * WIDTH_NIT - 12.5 * WIDTH_NIT, self.view.height - 146 * HEIGHT_NIT, 120 * WIDTH_NIT, 0.5)];
+//    [self.view addSubview:rightLine];
+//    rightLine.backgroundColor = HexStringColor(@"#cccccc");
+//
+//    UIImageView *QQImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, fastLoginLabel.bottom + 27 * HEIGHT_NIT, 45 * WIDTH_NIT, 45 * WIDTH_NIT)];
+//    [self.view addSubview:QQImage];
+//    QQImage.center = CGPointMake(self.view.centerX, leftLine.centerY + (tongyiLabel.centerY - leftLine.centerY) / 2);
+//    QQImage.image = [UIImage imageNamed:@"QQ"];
+//
+//    UIImageView *weixinImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 45 * WIDTH_NIT, 45 * WIDTH_NIT)];
+//    [self.view addSubview:weixinImage];
+//    weixinImage.center = CGPointMake(QQImage.centerX - 85 * WIDTH_NIT, QQImage.centerY);
+//    weixinImage.image = [UIImage imageNamed:@"微信"];
+//
+//    UIImageView *weiboImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 45 * WIDTH_NIT, 45 * WIDTH_NIT)];
+//    [self.view addSubview:weiboImage];
+//    weiboImage.center = CGPointMake(QQImage.centerX + 85 * WIDTH_NIT, QQImage.centerY);
+//    weiboImage.image = [UIImage imageNamed:@"微博"];
+//
+//    self.QQLoginButton = [UIButton new];
+//    [self.view addSubview:self.QQLoginButton];
+//    self.QQLoginButton.frame = CGRectMake(0, 0, 50 * WIDTH_NIT, 50 * WIDTH_NIT);
+//    self.QQLoginButton.center = QQImage.center;
+//    self.QQLoginButton.tag = 101;
+//    [self.QQLoginButton addTarget:self action:@selector(fastLoginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    self.weiboLoginButton = [UIButton new];
+//    [self.view addSubview:self.weiboLoginButton];
+//    self.weiboLoginButton.frame = CGRectMake(0, 0, 50 * WIDTH_NIT, 50 * WIDTH_NIT);
+//    self.weiboLoginButton.center = weiboImage.center;
+//    self.weiboLoginButton.tag = 102;
+//    [self.weiboLoginButton addTarget:self action:@selector(fastLoginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    self.weixinLoginButton = [UIButton new];
+//    [self.view addSubview:self.weixinLoginButton];
+//    self.weixinLoginButton.frame = CGRectMake(0, 0, 50 * WIDTH_NIT, 50 * WIDTH_NIT);
+//    self.weixinLoginButton.center = weixinImage.center;
+//    self.weixinLoginButton.tag = 100;
+//    [self.weixinLoginButton addTarget:self action:@selector(fastLoginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    CGRect frame1 = weixinImage.frame;
+//    CGRect frame2 = QQImage.frame;
+//    CGRect frame3 = weiboImage.frame;
+//
+//    CGRect buttonFrame1 = self.weixinLoginButton.frame;
+//    CGRect buttonFrame2 = self.QQLoginButton.frame;
+//    CGRect buttonFrame3 = self.weiboLoginButton.frame;
+//
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//
+//    #warning remember delete
+//        app.wxIsInstall = YES;
+//        app.weiboInstall = YES;
+//        app.QQIsInstall = YES;
+//
+//    if (app.wxIsInstall && app.weiboInstall && app.QQIsInstall) {
+//        // 都安装了
+//    } else if (app.wxIsInstall && !app.weiboInstall && app.QQIsInstall) {
+//        // 微博 未安装
+//        self.weiboLoginButton.hidden = YES;
+//        weiboImage.hidden = YES;
+//
+//    } else if (app.wxIsInstall && app.weiboInstall && !app.QQIsInstall) {
+//        // qq 未安装
+//        self.QQLoginButton.hidden = YES;
+//        QQImage.hidden = YES;
+//        self.weiboLoginButton.frame = buttonFrame2;
+//        weiboImage.frame = frame2;
+//
+//    } else if (!app.wxIsInstall && app.weiboInstall && app.QQIsInstall) {
+//        // 微信 未安装
+//        self.weixinLoginButton.hidden = YES;
+//        weixinImage.hidden = YES;
+//        self.QQLoginButton.frame = buttonFrame1;
+//        QQImage.frame = frame1;
+//        self.weiboLoginButton.frame = buttonFrame2;
+//        weiboImage.frame = frame2;
+//    } else if (app.wxIsInstall && !app.weiboInstall && !app.QQIsInstall) {
+//        // 微博 qq 未安装
+//        self.weiboLoginButton.hidden = YES;
+//        weiboImage.hidden = YES;
+//        self.QQLoginButton.hidden = YES;
+//        QQImage.hidden = YES;
+//    } else if (!app.wxIsInstall && app.weiboInstall && !app.QQIsInstall) {
+//        // 微信 qq 未安装
+//        self.weixinLoginButton.hidden = YES;
+//        weixinImage.hidden = YES;
+//        self.QQLoginButton.hidden = YES;
+//        QQImage.hidden = YES;
+//        self.weiboLoginButton.frame = buttonFrame1;
+//        weiboImage.frame = frame1;
+//    } else if (!app.wxIsInstall && !app.weiboInstall && app.QQIsInstall) {
+//        // 微信 微博 未安装
+//        self.weixinLoginButton.hidden = YES;
+//        weixinImage.hidden = YES;
+//        self.weiboLoginButton.hidden = YES;
+//        weiboImage.hidden = YES;
+//        self.QQLoginButton.frame = buttonFrame1;
+//        QQImage.frame = frame1;
+//    } else if (!app.wxIsInstall && !app.weiboInstall && !app.QQIsInstall) {
+//        // 都未安装
+//        self.weiboLoginButton.hidden = YES;
+//        self.weixinLoginButton.hidden = YES;
+//        self.QQLoginButton.hidden = YES;
+//        QQImage.hidden = YES;
+//        weiboImage.hidden = YES;
+//        weixinImage.hidden = YES;
+//        fastLoginLabel.hidden = YES;
+//        leftLine.hidden = YES;
+//        rightLine.hidden = YES;
+//    }
 
 }
 
@@ -457,14 +457,14 @@
             req.scope = @"snsapi_userinfo" ;
             req.state = @"123" ;
             //第三方向微信终端发送一个SendAuthReq消息结构
-            [WXApi sendReq:req];
+//            [WXApi sendReq:req];
             
         }
             break;
         case 1: {
             self.tencent = [[TencentOAuth alloc] initWithAppId:@"1104985545" andDelegate:self];
             NSArray *permisions = @[@"get_user_info",@"get_simple_userinfo",@"add_t"];
-            [self.tencent authorize:permisions inSafari:NO];
+//            [self.tencent authorize:permisions inSafari:NO];
         }
             break;
         case 2: {
@@ -478,9 +478,7 @@
             //                                 @"Other_Info_1": [NSNumber numberWithInt:123],
             //                                 @"Other_Info_2": @[@"obj1", @"obj2"],
             //                                 @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
-            [WeiboSDK sendRequest:request];
-            
-            
+//            [WeiboSDK sendRequest:request];
         }
             break;
             
@@ -505,32 +503,23 @@
 
 // 获取验证码
 - (void)getVertiNum:(WLCaptcheButton *)sender {
-    
     if (![XWAFNetworkTool checkNetwork]) {
-        
-        //        [MBProgressHUD showError:@"网络不给力"];
         [KVNProgress showErrorWithStatus:@"网络不给力"];
-        
         return;
     }
-    
     // 防止网不好，被人连点
-    self.getVerti.enabled = NO;
-    
-    NSLog(@"%@", self.accountTextField.text);
-    
-    [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:self.accountTextField.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
-        if (!error) {
-            NSLog(@"成功");
-            
-            [self.getVerti fire];
-            
-        } else {
-            NSLog(@"失败");
-            NSLog(@"请输入正确的手机号码");
-            self.getVerti.enabled = YES;
-        }
-    }];
+//    self.getVerti.enabled = NO;
+//    NSLog(@"%@", self.accountTextField.text);
+//    [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:self.accountTextField.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
+//        if (!error) {
+//            NSLog(@"成功");
+//            [self.getVerti fire];
+//        } else {
+//            NSLog(@"失败");
+//            NSLog(@"请输入正确的手机号码");
+//            self.getVerti.enabled = YES;
+//        }
+//    }];
 }
 
 // 验证验证码
@@ -547,7 +536,7 @@
         
         return;
     }
-    
+    [KVNProgress showWithStatus:@"请稍后..."];
     
 #if TEST_REGIST
     
@@ -555,7 +544,7 @@
     [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_USER_URL, weakSelf.accountTextField.text] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
         if ([resposeObject[@"status"] isEqualToNumber:@0]) {
             NSLog(@"用户已经存在");
-            
+            [KVNProgress dismiss];
             NSString *name = [resposeObject[@"name"] emojizedString];
             
             if (name.length != 0) {
@@ -570,6 +559,7 @@
             // 用户不存在,需要先注册
             
             [XWAFNetworkTool getUrl:[NSString stringWithFormat:ADD_USER_URL, self.accountTextField.text, @"000"] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+                [KVNProgress dismiss];
                 if ([resposeObject[@"status"] isEqualToNumber:@0]) {
                     NSLog(@"注册成功");
                     // 注册成功，跳转资料页面
@@ -592,12 +582,14 @@
             }];
             
         } else {
+            [KVNProgress dismiss];
             // 查询出错
             //                        [MBProgressHUD showError:@"服务器开小差了"];
             [KVNProgress showErrorWithStatus:@"服务器开小差了"];
             
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [KVNProgress dismiss];
         [KVNProgress showErrorWithStatus:@"服务器开小差了"];
     }];
     
@@ -605,12 +597,12 @@
     
 #endif
     
-    if (self.verification.text.length == 0) {
-        
-        //        [MBProgressHUD showError:@"验证码不能为空"];
-        [KVNProgress showErrorWithStatus:@"验证码不能为空"];
-        
-    } else {
+//    if (self.verification.text.length == 0) {
+//
+//        //        [MBProgressHUD showError:@"验证码不能为空"];
+//        [KVNProgress showErrorWithStatus:@"验证码不能为空"];
+//
+//    } else {
         
         if ([self.accountTextField.text isEqualToString:@"15216635764"] ||
             [self.accountTextField.text isEqualToString:@"15140669192"] ||
@@ -623,7 +615,7 @@
             [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_USER_URL, weakSelf.accountTextField.text] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
                 if ([resposeObject[@"status"] isEqualToNumber:@0]) {
                     NSLog(@"用户已经存在");
-                    
+                    [KVNProgress dismiss];
                     NSString *name = [resposeObject[@"name"] emojizedString];
                     
                     if (name.length != 0) {
@@ -636,11 +628,12 @@
                     
                 } else {
                     // 查询出错
-                    //                        [MBProgressHUD showError:@"服务器开小差了"];
+                    [KVNProgress dismiss];
                     [KVNProgress showErrorWithStatus:@"服务器开小差了"];
                     
                 }
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                [KVNProgress dismiss];
                 [KVNProgress showErrorWithStatus:@"服务器开小差了"];
             }];
             
@@ -649,21 +642,21 @@
         }
         
         // 防止被连点
-        self.commitButton.enabled = NO;
+//        self.commitButton.enabled = NO;
         
-        [SMSSDK commitVerificationCode:self.verification.text phoneNumber:self.accountTextField.text zone:@"86" result:^(NSError *error) {
-            if (!error) {
-                NSLog(@"验证成功");
-                
-                __weak typeof(self)weakSelf = self;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    weakSelf.commitButton.enabled = YES;
-                });
-                
-                [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_USER_URL, weakSelf.accountTextField.text] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+//        [SMSSDK commitVerificationCode:self.verification.text phoneNumber:self.accountTextField.text zone:@"86" result:^(NSError *error) {
+//            if (!error) {
+//                NSLog(@"验证成功");
+//
+//                __weak typeof(self)weakSelf = self;
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    weakSelf.commitButton.enabled = YES;
+//                });
+//
+                [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_USER_URL, self.accountTextField.text] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
                     if ([resposeObject[@"status"] isEqualToNumber:@0]) {
                         NSLog(@"用户已经存在");
-                        
+                        [KVNProgress dismiss];
                         NSString *name = [resposeObject[@"name"] emojizedString];
                         
                         if (name.length != 0) {
@@ -678,6 +671,7 @@
                         // 用户不存在,需要先注册
                         
                         [XWAFNetworkTool getUrl:[NSString stringWithFormat:ADD_USER_URL, self.accountTextField.text, @"000"] body:nil response:XWJSON requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+                            [KVNProgress dismiss];
                             if ([resposeObject[@"status"] isEqualToNumber:@0]) {
                                 NSLog(@"注册成功");
                                 // 注册成功，跳转资料页面
@@ -701,28 +695,28 @@
                         
                     } else {
                         // 查询出错
-                        //                        [MBProgressHUD showError:@"服务器开小差了"];
+                        [KVNProgress dismiss];
                         [KVNProgress showErrorWithStatus:@"服务器开小差了"];
                         
                     }
                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                    [KVNProgress dismiss];
                     [KVNProgress showErrorWithStatus:@"服务器开小差了"];
                 }];
-                
-            } else {
-                
-                __weak typeof(self)weakSelf = self;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    weakSelf.commitButton.enabled = YES;
-                });
-                
-                NSLog(@"错误信息:%@",error);
-                //                [MBProgressHUD showError:@"验证码错误"];
-                [KVNProgress showErrorWithStatus:@"验证码错误"];
-            }
-        }];
-    }
-    
+//
+//            } else {
+//
+//                __weak typeof(self)weakSelf = self;
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    weakSelf.commitButton.enabled = YES;
+//                });
+//
+//                NSLog(@"错误信息:%@",error);
+//                //                [MBProgressHUD showError:@"验证码错误"];
+//                [KVNProgress showErrorWithStatus:@"验证码错误"];
+//            }
+//        }];
+//    }
 }
 
 // 第三方登录后操作
@@ -817,17 +811,17 @@
                 KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
                 NSString *userId = [wrapper objectForKey:(id)kSecValueData];
                 
-                // 登录环信
-                BOOL isAutoLogin = [EMClient sharedClient].options.isAutoLogin;
-                if (!isAutoLogin) {
-                    EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
-                    if (!error) {
-                        NSLog(@"登录成功");
-                        [[EMClient sharedClient].options setIsAutoLogin:YES];
-                    } else {
-                        NSLog(@"登录失败 %@", error.description);
-                    }
-                }
+//                // 登录环信
+//                BOOL isAutoLogin = [EMClient sharedClient].options.isAutoLogin;
+//                if (!isAutoLogin) {
+//                    EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
+//                    if (!error) {
+//                        NSLog(@"登录成功");
+//                        [[EMClient sharedClient].options setIsAutoLogin:YES];
+//                    } else {
+//                        NSLog(@"登录失败 %@", error.description);
+//                    }
+//                }
                 
             }
         } failure:^(NSURLSessionDataTask *task, NSError *error) {

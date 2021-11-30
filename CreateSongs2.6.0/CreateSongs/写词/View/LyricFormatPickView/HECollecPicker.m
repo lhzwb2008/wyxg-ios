@@ -93,22 +93,22 @@
 
 
 - (void)checkIfViewIsShowing {
-    while (1) {
-        if (self.collectionView.window != nil) {
-            break;
-        }
-    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        while (1) {
+            if (self.collectionView.window != nil) {
+                break;
+            }
+        }
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentShowIndex inSection:500] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
         
         if (self.appearSelectFormat) {
             self.appearSelectFormat(self.currentShowIndex);
         }
+        
+        [checkShownThread cancel];
+        checkShownThread = nil;
     });
-    
-    [checkShownThread cancel];
-    checkShownThread = nil;
 }
 
 

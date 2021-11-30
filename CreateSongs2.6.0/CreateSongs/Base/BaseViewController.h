@@ -14,6 +14,7 @@
 @interface BaseViewController : UIViewController
 
 // 导航栏
+@property (nonatomic, strong) UIView *navFakeView;
 @property (nonatomic, strong) UIView *navView;
 
 @property (nonatomic, strong) UIImageView *navLeftImage;
@@ -22,7 +23,7 @@
 
 @property (nonatomic, strong) UIImageView *navRightImage;
 
-@property (nonatomic, strong) NavRightButton *navRightButton;
+@property (nonatomic, strong) UIButton *navRightButton;
 
 @property (nonatomic, strong) UILabel *navTitle;
 

@@ -1,0 +1,27 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'CreateSongs' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  pod 'UMCommon'
+  pod 'UMDevice'
+  pod 'UMCCommonLog'
+  pod 'UMShare/UI'
+  pod 'UMShare/Social/WeChat'
+  pod 'UMShare/Social/Sina'
+  pod 'UMShare/Social/QQ'
+  pod 'mob_smssdk'
+  pod 'EaseMobSDK', :git => 'https://github.com/easemob/sdk-ios-cocoapods.git'
+
+  target 'CreateSongsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'CreateSongsUITests' do
+    # Pods for testing
+  end
+
+end

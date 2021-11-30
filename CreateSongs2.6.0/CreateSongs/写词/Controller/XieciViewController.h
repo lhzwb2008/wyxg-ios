@@ -10,7 +10,7 @@
 #import "CreateSongs.h"
 #import "KVNProgress.h"
 #import "AXGMessage.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 
 
 @interface XieciViewController : BaseViewController

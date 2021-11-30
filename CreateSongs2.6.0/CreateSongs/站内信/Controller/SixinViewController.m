@@ -7,11 +7,11 @@
 //
 
 #import "SixinViewController.h"
-#import "EMClient.h"
+//#import "EMClient.h"
 #import "ConversationModel.h"
-#import "EMSDK.h"
+//#import "EMSDK.h"
 #import "SixinTableViewCell.h"
-#import "ChatViewController.h"
+//#import "ChatViewController.h"
 #import "KeychainItemWrapper.h"
 
 static NSString *const identifier = @"identifier";
@@ -90,87 +90,86 @@ static NSString *const identifier = @"identifier";
 //        NSLog(@"登录失败 %@", error.description);
 //    }
     
-    NSMutableArray *mutArray = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
-    for (EMConversation *conversation in conversations) {
-        
-//        [[EMClient sharedClient].chatManager deleteConversation:conversation.conversationId isDeleteMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
-//            
-//        }];
-        
-        NSString *unreadCount = @"";
-        NSString *imgUrl = @"";
-        NSString *nickName = @"";
-        NSString *content = @"";
-        NSString *timetamp = @"";
-        NSString *conversationID = @"";
-        
-        unreadCount = [NSString stringWithFormat:@"%d", conversation.unreadMessagesCount];
-        
-        if (conversation.lastReceivedMessage.ext[@"head_img"] && ([conversation.lastReceivedMessage.ext[@"head_img"] length] != 0)) {
-            imgUrl = conversation.lastReceivedMessage.ext[@"head_img"];
-        } else {
-            imgUrl = conversation.latestMessage.ext[@"other_img"];
-        }
-        if (conversation.lastReceivedMessage.ext[@"nick_name"] && ([conversation.lastReceivedMessage.ext[@"nick_name"] length] != 0)) {
-            nickName = conversation.lastReceivedMessage.ext[@"nick_name"];
-        } else {
-            nickName = conversation.latestMessage.ext[@"other_name"];
-        }
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterMediumStyle];
-        [formatter setTimeStyle:NSDateFormatterShortStyle];
-        [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-        NSDate *confromTimesp = nil;
-        if (conversation.lastReceivedMessage) {
-            confromTimesp = [NSDate dateWithTimeIntervalSince1970:conversation.lastReceivedMessage.timestamp / 1000.0];
-        } else {
-            confromTimesp = [NSDate dateWithTimeIntervalSince1970:conversation.latestMessage.timestamp / 1000.0];
-        }
-        timetamp = [formatter stringFromDate:confromTimesp];
-        
-        conversationID = conversation.conversationId;
-
-        switch (conversation.lastReceivedMessage.body.type) {
-            case EMMessageBodyTypeText: {
-                
-                EMTextMessageBody *messageBody = (EMTextMessageBody *)conversation.lastReceivedMessage.body;
-                content = messageBody.text;
-                
-            }
-                break;
-            case EMMessageBodyTypeImage: {
-                
-                content = @"[图片]";
-                
-            }
-                break;
-            case EMMessageBodyTypeLocation: {
-                
-                content = @"[位置]";
-                
-            }
-                
-            default:
-                break;
-        }
-        
-        NSDictionary *dic = @{@"unreadCount":unreadCount, @"imgUrl":imgUrl, @"nickName":nickName, @"content":content, @"timetamp":timetamp, @"conversationID":conversationID};
-        ConversationModel *model = [[ConversationModel alloc] initWithDictionary:dic error:nil];
-        
-        if (conversation.unreadMessagesCount != 0) {
-            [mutArray insertObject:model atIndex:0];
-        } else {
-            [mutArray addObject:model];
-        }
-    }
-    
-    [self.conversationDataSource removeAllObjects];
-    [self.conversationDataSource addObjectsFromArray:mutArray];
-    [self.tableView reloadData];
-    
+//    NSMutableArray *mutArray = [[NSMutableArray alloc] initWithCapacity:0];
+//
+//    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+//    for (EMConversation *conversation in conversations) {
+//
+////        [[EMClient sharedClient].chatManager deleteConversation:conversation.conversationId isDeleteMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
+////
+////        }];
+//
+//        NSString *unreadCount = @"";
+//        NSString *imgUrl = @"";
+//        NSString *nickName = @"";
+//        NSString *content = @"";
+//        NSString *timetamp = @"";
+//        NSString *conversationID = @"";
+//
+//        unreadCount = [NSString stringWithFormat:@"%d", conversation.unreadMessagesCount];
+//
+//        if (conversation.lastReceivedMessage.ext[@"head_img"] && ([conversation.lastReceivedMessage.ext[@"head_img"] length] != 0)) {
+//            imgUrl = conversation.lastReceivedMessage.ext[@"head_img"];
+//        } else {
+//            imgUrl = conversation.latestMessage.ext[@"other_img"];
+//        }
+//        if (conversation.lastReceivedMessage.ext[@"nick_name"] && ([conversation.lastReceivedMessage.ext[@"nick_name"] length] != 0)) {
+//            nickName = conversation.lastReceivedMessage.ext[@"nick_name"];
+//        } else {
+//            nickName = conversation.latestMessage.ext[@"other_name"];
+//        }
+//
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateStyle:NSDateFormatterMediumStyle];
+//        [formatter setTimeStyle:NSDateFormatterShortStyle];
+//        [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+//        NSDate *confromTimesp = nil;
+//        if (conversation.lastReceivedMessage) {
+//            confromTimesp = [NSDate dateWithTimeIntervalSince1970:conversation.lastReceivedMessage.timestamp / 1000.0];
+//        } else {
+//            confromTimesp = [NSDate dateWithTimeIntervalSince1970:conversation.latestMessage.timestamp / 1000.0];
+//        }
+//        timetamp = [formatter stringFromDate:confromTimesp];
+//
+//        conversationID = conversation.conversationId;
+//
+//        switch (conversation.lastReceivedMessage.body.type) {
+//            case EMMessageBodyTypeText: {
+//
+//                EMTextMessageBody *messageBody = (EMTextMessageBody *)conversation.lastReceivedMessage.body;
+//                content = messageBody.text;
+//
+//            }
+//                break;
+//            case EMMessageBodyTypeImage: {
+//
+//                content = @"[图片]";
+//
+//            }
+//                break;
+//            case EMMessageBodyTypeLocation: {
+//
+//                content = @"[位置]";
+//
+//            }
+//
+//            default:
+//                break;
+//        }
+//
+//        NSDictionary *dic = @{@"unreadCount":unreadCount, @"imgUrl":imgUrl, @"nickName":nickName, @"content":content, @"timetamp":timetamp, @"conversationID":conversationID};
+//        ConversationModel *model = [[ConversationModel alloc] initWithDictionary:dic error:nil];
+//
+//        if (conversation.unreadMessagesCount != 0) {
+//            [mutArray insertObject:model atIndex:0];
+//        } else {
+//            [mutArray addObject:model];
+//        }
+//    }
+//
+//    [self.conversationDataSource removeAllObjects];
+//    [self.conversationDataSource addObjectsFromArray:mutArray];
+//    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -203,9 +202,9 @@ static NSString *const identifier = @"identifier";
         
         ConversationModel *model = cell.model;
         
-        [[EMClient sharedClient].chatManager deleteConversation:model.conversationID isDeleteMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
-            
-        }];
+//        [[EMClient sharedClient].chatManager deleteConversation:model.conversationID isDeleteMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
+//
+//        }];
         
         [self.conversationDataSource removeObject:model];
         
@@ -224,42 +223,41 @@ static NSString *const identifier = @"identifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    tableView.allowsSelection = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        tableView.allowsSelection = YES;
-    });
-    
-    SixinTableViewCell *cell = (SixinTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
-    NSLog(@"会话id %@", cell.model.conversationID);
-    
-    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
-    NSString *phone = [wrapper objectForKey:(id)kSecAttrAccount];
-    NSString *userId = [wrapper objectForKey:(id)kSecValueData];
-    NSString *rightImg = [NSString stringWithFormat:GET_USER_HEAD, [XWAFNetworkTool md5HexDigest:phone]];
-    
-    if ([[EMClient sharedClient] isLoggedIn]) {
-        ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:cell.model.conversationID conversationType:EMConversationTypeChat];
-        chatView.leftNameFromSuper = cell.model.nickName;
-        chatView.leftHeadImgFromSuper = cell.model.imgUrl;
-        chatView.rightHeadImgFromSuper = rightImg;
-        [self.navigationController pushViewController:chatView animated:YES];
-    } else {
-        EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
-        if (!error) {
-            NSLog(@"登录成功");
-            
-            ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:cell.model.conversationID conversationType:EMConversationTypeChat];
-            chatView.leftNameFromSuper = cell.model.nickName;
-            chatView.leftHeadImgFromSuper = cell.model.imgUrl;
-            chatView.rightHeadImgFromSuper = rightImg;
-            [self.navigationController pushViewController:chatView animated:YES];
-            
-        } else {
-            NSLog(@"登录失败 %@", error.description);
-        }
-    }
-    
+//    tableView.allowsSelection = NO;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        tableView.allowsSelection = YES;
+//    });
+//
+//    SixinTableViewCell *cell = (SixinTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+//
+//    NSLog(@"会话id %@", cell.model.conversationID);
+//
+//    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
+//    NSString *phone = [wrapper objectForKey:(id)kSecAttrAccount];
+//    NSString *userId = [wrapper objectForKey:(id)kSecValueData];
+//    NSString *rightImg = [NSString stringWithFormat:GET_USER_HEAD, [XWAFNetworkTool md5HexDigest:phone]];
+//
+//    if ([[EMClient sharedClient] isLoggedIn]) {
+//        ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:cell.model.conversationID conversationType:EMConversationTypeChat];
+//        chatView.leftNameFromSuper = cell.model.nickName;
+//        chatView.leftHeadImgFromSuper = cell.model.imgUrl;
+//        chatView.rightHeadImgFromSuper = rightImg;
+//        [self.navigationController pushViewController:chatView animated:YES];
+//    } else {
+//        EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
+//        if (!error) {
+//            NSLog(@"登录成功");
+//
+//            ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:cell.model.conversationID conversationType:EMConversationTypeChat];
+//            chatView.leftNameFromSuper = cell.model.nickName;
+//            chatView.leftHeadImgFromSuper = cell.model.imgUrl;
+//            chatView.rightHeadImgFromSuper = rightImg;
+//            [self.navigationController pushViewController:chatView animated:YES];
+//
+//        } else {
+//            NSLog(@"登录失败 %@", error.description);
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

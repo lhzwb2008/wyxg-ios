@@ -11,9 +11,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "LyricTableViewCell.h"
 #import "AXGMusicPlayer.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "WXApi.h"
-#import "UMSocial.h"
+#import <UMShare/UMShare.h>
 #import "AppDelegate.h"
 #import "ToastView.h"
 #import "WeiboSDK.h"

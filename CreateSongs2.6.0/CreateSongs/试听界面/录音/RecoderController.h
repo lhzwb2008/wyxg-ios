@@ -19,10 +19,10 @@
 
 #define kFourLyricHeight (20+15)*HEIGHT_NIT
 
-#define ZOUYIN_URL  @"https://service.woyaoxiege.com/core/home/index/template"
-//https://service.woyaoxiege.com/music/zouyin_lrc/frx.lrc
-//#define ZOUYIN_LRC  @"https://service.woyaoxiege.com/music/zouyin_lrc/%@_play.lrc"
-#define ZOUYIN_BANXOU   @"https://service.woyaoxiege.com/music/zouyin_acc/%@.mp3"
+#define ZOUYIN_URL  @"http://1.117.109.129/core/home/index/template"
+//http://1.117.109.129/core/music/zouyin_lrc/frx.lrc
+//#define ZOUYIN_LRC  @"http://1.117.109.129/core/music/zouyin_lrc/%@_play.lrc"
+#define ZOUYIN_BANXOU   @"http://1.117.109.129/core/music/zouyin_acc/%@.mp3"
 @interface RecoderController : PlayViewController
 
 @property (nonatomic, strong) XMidiPlayer *midiPlayer;

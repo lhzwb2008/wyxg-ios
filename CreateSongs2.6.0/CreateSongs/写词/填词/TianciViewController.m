@@ -17,10 +17,10 @@
 #import "XianQuShiTingViewController.h"
 #import "PlayShareObjects.h"
 #import "AppDelegate.h"
+#import "Tianci_ChooseSinger_Controller.h"
 
 
-
-#define ZOUYIN_URL  @"https://service.woyaoxiege.com/core/home/index/zouyin?title=%@&content=%@&yuanqu=%@"
+#define ZOUYIN_URL  @"http://1.117.109.129/core/home/index/zouyin?title=%@&content=%@&yuanqu=%@"
 
 @interface TianciViewController ()
 
@@ -167,7 +167,8 @@
 
 // 创建歌词界面
 - (void)createLyricView {
-    self.tianCiMainView = [[TianciMainView alloc] initWithFrame:CGRectMake(0, 64 + 25 * HEIGHT_NIT, self.view.width, self.view.height - self.navView.height - 25 * HEIGHT_NIT - 50 * WIDTH_NIT)];
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
+    self.tianCiMainView = [[TianciMainView alloc] initWithFrame:CGRectMake(0, navH + 25 * HEIGHT_NIT, self.view.width, self.view.height - self.navView.height - 25 * HEIGHT_NIT - 50 * WIDTH_NIT)];
     self.tianCiMainView.backgroundColor = [UIColor clearColor];
     WEAK_SELF;
     self.tianCiMainView.lyTextArray = self.lyricFormatArray;
@@ -371,42 +372,36 @@
         i++;
     }
     app.template_id = self.itemModel.id;
+    
 #if XUANQU_FROME_NET
-    xqc.zouyinUrl = @{@"title":self.tianciName,
-                      @"content":content,
-                      @"id":self.itemModel.id,
-                      @"singer":self.itemModel.singer,
-                      };
+
 #elif !XUANQU_FROME_NET
     NSString *url = [NSString stringWithFormat:ZOUYIN_URL, self.tianciName, content, self.requestSongName];
     xqc.zouyinUrl = url;
 #endif
-    xqc.lyricDataSource = self.finalLyricArray;
-    xqc.isFirstPlay = YES;
-    xqc.isFromPlayView = NO;
-    xqc.isFromTianciPage = YES;
-    xqc.isFirstGetZouyinMp3 = YES;
-    xqc.titleStr = self.tianciName;
-    xqc.songName = xqc.titleStr;
-    xqc.requestHeadName = self.requestHeadName;
-    xqc.zouyin_banzouUrl = self.itemModel.acc_mp3;
-    xqc.requestSongName = self.requestSongName;
     [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"loading"];
     
     [PlayViewController sharePlayVC];
-//    PlayShareObjects *object = [PlayShareObjects sharedPlayShareObjects];
-//    object.lyricDataSource = self.finalLyricArray;
-//    object.isFirstPlay = YES;
-//    object.isFirstPlay = YES;
-//    object.isFromPlayView = NO;
-//    object.isFromTianciPage = YES;
-//    object.isFirstGetZouyinMp3 = YES;
-//    object.titleStr = self.tianciName;
-//    object.songName = xqc.titleStr;
-//    object.requestHeadName = self.requestHeadName;
-//    object.zouyin_banzouUrl = self.itemModel.acc_mp3;
+
+//    [self.navigationController pushViewController:xqc animated:YES];
     
-    [self.navigationController pushViewController:xqc animated:YES];
+    Tianci_ChooseSinger_Controller *tcc = [Tianci_ChooseSinger_Controller new];
+    tcc.zouyinUrl = @{@"title":self.tianciName,
+                      @"content":content,
+                      @"id":self.itemModel.id,
+                      @"singer":self.itemModel.singer,
+                      };
+    tcc.lyricDataSource = self.finalLyricArray;
+    tcc.isFirstPlay = YES;
+    tcc.isFromPlayView = NO;
+    tcc.isFromTianciPage = YES;
+    tcc.isFirstGetZouyinMp3 = YES;
+    tcc.titleStr = self.tianciName;
+    tcc.songName = xqc.titleStr;
+    tcc.requestHeadName = self.requestHeadName;
+    tcc.zouyin_banzouUrl = self.itemModel.acc_mp3;
+    tcc.requestSongName = self.requestSongName;
+    [self.navigationController pushViewController:tcc animated:YES];
 }
 
 

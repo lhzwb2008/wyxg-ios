@@ -16,7 +16,7 @@
 #import "AboutUsViewController.h"
 #import "UserSongShareView.h"
 #import "WXApi.h"
-#import "UMSocial.h"
+#import <UMShare/UMShare.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterfaceObject.h>
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -26,14 +26,14 @@
 #import "LoginViewController.h"
 #import "KeychainItemWrapper.h"
 #import <Security/Security.h>
-#import "EMSDK.h"
+//#import "EMSDK.h"
 #import "AXGMediator+MediatorModuleAActions.h"
 #import "NSString+Common.h"
 #import "AXGMessage.h"
 
 #define SHAREVIEW_HEIGHT ((50 * WIDTH_NIT + 6 * HEIGHT_NIT + 12 * HEIGHT_NIT + 30 * HEIGHT_NIT) * 2 + 10 * HEIGHT_NIT + 33.5 * HEIGHT_NIT)
 
-@interface SettingViewController ()<WXApiDelegate, UMSocialUIDelegate>
+@interface SettingViewController ()<WXApiDelegate>
 
 //@property (nonatomic, strong) UserSongShareView *shareView;
 
@@ -306,44 +306,44 @@
 // 刷新站内信数据
 - (void)reloadMsg {
     
-    NSMutableArray *mutaArr = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
-        
-        //     获取用户id
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
-        NSString *userId = [wrapper objectForKey:(id)kSecValueData];
-        
-        WEAK_SELF;
-        [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_MESSAGE, userId] body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-            NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:resposeObject options:0 error:nil];
-            STRONG_SELF;
-            if ([dic1[@"status"] isEqualToNumber:@0]) {
-                NSArray *array = dic1[@"items"];
-                
-                for (NSDictionary *dic in array) {
-                    if ([dic[@"is_read"] isEqualToString:@"1"]) {
-                        
-                    } else {
-                        [mutaArr addObject:dic];
-                    }
-                }
-                
-                if (mutaArr.count != 0) {
-                    self.msgView.hidden = NO;
-                } else {
-                    self.msgView.hidden = YES;
-                }
-                
-            } else {
-                self.msgView.hidden = YES;
-            }
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            self.msgView.hidden = YES;
-        }];
-    } else {
+//    NSMutableArray *mutaArr = [[NSMutableArray alloc] initWithCapacity:0];
+//
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IS_LOGIN] isEqualToString:IS_LOGIN_YES]) {
+//
+//        //     获取用户id
+//        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
+//        NSString *userId = [wrapper objectForKey:(id)kSecValueData];
+//
+//        WEAK_SELF;
+//        [XWAFNetworkTool getUrl:[NSString stringWithFormat:GET_MESSAGE, userId] body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+//            NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:resposeObject options:0 error:nil];
+//            STRONG_SELF;
+//            if ([dic1[@"status"] isEqualToNumber:@0]) {
+//                NSArray *array = dic1[@"items"];
+//
+//                for (NSDictionary *dic in array) {
+//                    if ([dic[@"is_read"] isEqualToString:@"1"]) {
+//
+//                    } else {
+//                        [mutaArr addObject:dic];
+//                    }
+//                }
+//
+//                if (mutaArr.count != 0) {
+//                    self.msgView.hidden = NO;
+//                } else {
+//                    self.msgView.hidden = YES;
+//                }
+//
+//            } else {
+//                self.msgView.hidden = YES;
+//            }
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//            self.msgView.hidden = YES;
+//        }];
+//    } else {
         self.msgView.hidden = YES;
-    }
+//    }
     
 }
 
@@ -471,10 +471,10 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:USER_ACCOUNT accessGroup:nil];
     [wrapper resetKeychainItem];
     
-    EMError *error = [[EMClient sharedClient] logout:YES];
-    if (!error) {
-        NSLog(@"退出环信成功");
-    }
+//    EMError *error = [[EMClient sharedClient] logout:YES];
+//    if (!error) {
+//        NSLog(@"退出环信成功");
+//    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_DRAWER object:nil];
 //    [[NSUserDefaults standardUserDefaults] setObject:LOGIN_LOCATION_DRAWER forKey:LOGIN_LOCATION];
@@ -649,7 +649,7 @@
     req.message = message;
     req.scene = WXSceneSession;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
     
     //    AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //    myAppDelegate.ShareType = wxShare;
@@ -683,7 +683,7 @@
     req.message = message;
     req.scene = WXSceneTimeline;
     
-    [WXApi sendReq:req];
+//    [WXApi sendReq:req];
     
     //    AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //    myAppDelegate.ShareType = wxFriend;
@@ -776,16 +776,16 @@
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-    
-    [[UMSocialDataService defaultDataService] postSNSWithTypes:@[UMShareToSina] content:web image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            NSLog(@"分享成功");
-            AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            myAppDelegate.willShowShareToast = YES;
-            //            [MobClick event:@"play_weiboShareSuccess"];
-        }
+    UMSocialMessageObject *messageObject =[UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:writer thumImage:[UIImage imageNamed:@"shareIcon"]];
+    shareObject.webpageUrl = web;
+    messageObject.shareObject = shareObject;
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Sina messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+        NSLog(@"分享成功");
+        AppDelegate *myAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        myAppDelegate.willShowShareToast = YES;
+//        [MobClick event:@"play_weiboShareSuccess"];
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,8 +11,8 @@
 #import "ImageZoom.h"
 #import "NavLeftButton.h"
 #import "LoginViewController.h"
-#import "ChatViewController.h"
-#import "EMSDK.h"
+//#import "ChatViewController.h"
+//#import "EMSDK.h"
 
 @implementation OtherPersonCenterController
 
@@ -103,27 +103,27 @@
             NSString *leftName = self.sixinName;
             NSString *leftImg = self.sixinImg;
             
-            if ([[EMClient sharedClient] isLoggedIn]) {
-                ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:self.userId conversationType:EMConversationTypeChat];
-                chatView.leftNameFromSuper = leftName;
-                chatView.leftHeadImgFromSuper = leftImg;
-                chatView.rightHeadImgFromSuper = rightImg;
-                [self.navigationController pushViewController:chatView animated:YES];
-            } else {
-                EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
-                if (!error) {
-                    NSLog(@"登录成功");
-                    
-                    ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:self.userId conversationType:EMConversationTypeChat];
-                    chatView.leftNameFromSuper = leftName;
-                    chatView.leftHeadImgFromSuper = leftImg;
-                    chatView.rightHeadImgFromSuper = rightImg;
-                    [self.navigationController pushViewController:chatView animated:YES];
-                    
-                } else {
-                    NSLog(@"登录失败 %@", error.description);
-                }
-            }
+//            if ([[EMClient sharedClient] isLoggedIn]) {
+//                ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:self.userId conversationType:EMConversationTypeChat];
+//                chatView.leftNameFromSuper = leftName;
+//                chatView.leftHeadImgFromSuper = leftImg;
+//                chatView.rightHeadImgFromSuper = rightImg;
+//                [self.navigationController pushViewController:chatView animated:YES];
+//            } else {
+//                EMError *error = [[EMClient sharedClient] loginWithUsername:userId password:@"000"];
+//                if (!error) {
+//                    NSLog(@"登录成功");
+//
+//                    ChatViewController *chatView = [[ChatViewController alloc] initWithConversationChatter:self.userId conversationType:EMConversationTypeChat];
+//                    chatView.leftNameFromSuper = leftName;
+//                    chatView.leftHeadImgFromSuper = leftImg;
+//                    chatView.rightHeadImgFromSuper = rightImg;
+//                    [self.navigationController pushViewController:chatView animated:YES];
+//
+//                } else {
+//                    NSLog(@"登录失败 %@", error.description);
+//                }
+//            }
             
         } else {
             

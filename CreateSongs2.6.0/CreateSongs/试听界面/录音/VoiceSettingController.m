@@ -15,7 +15,7 @@
 #import "AXGMixer.h"
 #import "lame.h"
 #import "SongLoadingView.h"
-#import "MobClick.h"
+#import <UMCommon/MobClick.h>
 #import "KVNProgress.h"
 #import "AFNetworking.h"
 #import "AXGHeader.h"
@@ -630,7 +630,7 @@
 
 /*
  067745869ccc43f8e18cbd200361e0f6_28
- https://service.woyaoxiege.com/music/mp3/067745869ccc43f8e18cbd200361e0f6_28.mp3
+ http://1.117.109.129/core/music/mp3/067745869ccc43f8e18cbd200361e0f6_28.mp3
  http://www.woyaoxiege.com/home/index/play/067745869ccc43f8e18cbd200361e0f6_28
  */
 - (void)uploadMixData {

@@ -15,7 +15,7 @@
 #import "MsgViewController.h"
 #import "CreateSongs-Swift.h"
 #import "AXGTools.h"
-#import "EMClient.h"
+//#import "EMClient.h"
 #import "SixinViewController.h"
 #import "LoginViewController.h"
 
@@ -114,9 +114,9 @@
 - (void)initView {
     
     // 私信和评论图标互换
-    
+    CGFloat navH = kDevice_Is_iPhoneX ? 88 : 64;
     TotalMsgButton *sixinButton = [TotalMsgButton buttonWithType:UIButtonTypeCustom];
-    sixinButton.frame = CGRectMake(0, 64 + 15 * WIDTH_NIT, self.view.width, 55 * WIDTH_NIT);
+    sixinButton.frame = CGRectMake(0, navH + 15 * WIDTH_NIT, self.view.width, 55 * WIDTH_NIT);
     [sixinButton setImage:[UIImage imageNamed:@"站内信_评论"] forState:UIControlStateNormal];
     [sixinButton setTitle:@"私信" forState:UIControlStateNormal];
     sixinButton.tag = 104;
@@ -232,6 +232,7 @@
 - (void)backButtonAction {
     KYDrawerController *drawerVC = (KYDrawerController *)self.navigationController.parentViewController;
     
+//    [drawerVC setDrawerSegueIdentifier:@""];
     [drawerVC setDrawerState:DrawerStateOpened animated:YES];
 }
 
@@ -342,29 +343,29 @@
 // 获取私信数据
 - (void)getSixinData {
     
-    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
-    NSInteger unreadCount = 0;
-    for (EMConversation *conversation in conversations) {
-        unreadCount += conversation.unreadMessagesCount;
-    }
-    
-    CGFloat width1 = [AXGTools getTextWidth:@"6" font:ZHONGDENG_FONT(12)];
-    CGFloat width2 = [AXGTools getTextWidth:@"66" font:ZHONGDENG_FONT(12)];
-    CGFloat width3 = [AXGTools getTextWidth:@"99+" font:ZHONGDENG_FONT(12)];
-    
-    if (unreadCount <= 0) {
+//    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+//    NSInteger unreadCount = 0;
+//    for (EMConversation *conversation in conversations) {
+//        unreadCount += conversation.unreadMessagesCount;
+//    }
+//
+//    CGFloat width1 = [AXGTools getTextWidth:@"6" font:ZHONGDENG_FONT(12)];
+//    CGFloat width2 = [AXGTools getTextWidth:@"66" font:ZHONGDENG_FONT(12)];
+//    CGFloat width3 = [AXGTools getTextWidth:@"99+" font:ZHONGDENG_FONT(12)];
+//
+//    if (unreadCount <= 0) {
         self.sixinLabel.text = @"0";
         self.sixinLabel.frame = CGRectMake(self.originRect.origin.x, self.originRect.origin.y, 0, self.originRect.size.height);
-    } else if (unreadCount < 10) {
-        self.sixinLabel.text = [NSString stringWithFormat:@"%ld", unreadCount];
-        self.sixinLabel.frame = CGRectMake(self.originRect.origin.x, self.originRect.origin.y, 20 * WIDTH_NIT, self.originRect.size.height);
-    } else if (unreadCount <= 99) {
-        self.sixinLabel.text = [NSString stringWithFormat:@"%ld", unreadCount];
-        self.sixinLabel.frame = CGRectMake(self.originRect.origin.x - (width2 - width1), self.originRect.origin.y, 20 * WIDTH_NIT + (width2 - width1), self.originRect.size.height);
-    } else {
-        self.sixinLabel.text = @"99+";
-        self.sixinLabel.frame = CGRectMake(self.originRect.origin.x - (width3 - width1), self.originRect.origin.y, 20 * WIDTH_NIT + (width3 - width1), self.originRect.size.height);
-    }
+//    } else if (unreadCount < 10) {
+//        self.sixinLabel.text = [NSString stringWithFormat:@"%ld", unreadCount];
+//        self.sixinLabel.frame = CGRectMake(self.originRect.origin.x, self.originRect.origin.y, 20 * WIDTH_NIT, self.originRect.size.height);
+//    } else if (unreadCount <= 99) {
+//        self.sixinLabel.text = [NSString stringWithFormat:@"%ld", unreadCount];
+//        self.sixinLabel.frame = CGRectMake(self.originRect.origin.x - (width2 - width1), self.originRect.origin.y, 20 * WIDTH_NIT + (width2 - width1), self.originRect.size.height);
+//    } else {
+//        self.sixinLabel.text = @"99+";
+//        self.sixinLabel.frame = CGRectMake(self.originRect.origin.x - (width3 - width1), self.originRect.origin.y, 20 * WIDTH_NIT + (width3 - width1), self.originRect.size.height);
+//    }
     
 }
 
