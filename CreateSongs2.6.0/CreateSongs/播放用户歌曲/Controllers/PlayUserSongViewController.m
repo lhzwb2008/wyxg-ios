@@ -943,41 +943,34 @@ static NSString *const memberIdentifier = @"memberIdentifier";
         [KVNProgress showErrorWithStatus:@"网络不给力"];
         return;
     }
-//    WEAK_SELF;
-//    [XWAFNetworkTool getUrl:self.lyricURL body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
-//        STRONG_SELF;
-//        NSLog(@"%@", resposeObject);
-       
-//        NSString *lyric = [[NSString alloc] initWithData:resposeObject encoding:NSUTF8StringEncoding];
-        
-    NSString *lyric = @"afdasdfa~sadfa~";
-    
-        self.lyricFrameModel.lyric = [lyric stringByReplacingOccurrencesOfString:@"-" withString:@"～"];
-        
-        self.curretnLyric = [self.lyricFrameModel.lyricStrArray firstObject];
-        
-        [self requestMidiData];
-        
-        [self.lyricsView setText: self.curretnLyric];
-        
-        [self changeLyricColor];
-        /**
-         *  刷新歌词所在区
-         */
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:3];
-        [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self getCommentsData];
-        
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        NSLog(@"%@", error);
-//        if (error.code == -1001) {
-////            [MBProgressHUD showError:@"网络不给力"];
-//            [KVNProgress showErrorWithStatus:@"网络不给力"];
-//        } else {
-////            [MBProgressHUD showError:@"服务器开小差了"];
-//            [KVNProgress showErrorWithStatus:@"服务器开小差了"];
-//        }
-//    }];
+    WEAK_SELF;
+    [XWAFNetworkTool getUrl:self.lyricURL body:nil response:XWData requestHeadFile:nil success:^(NSURLSessionDataTask *task, id resposeObject) {
+        STRONG_SELF;
+        NSString *lyric = [[NSString alloc] initWithData:resposeObject encoding:NSUTF8StringEncoding];
+        [self handlerWithLyric:lyric];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@", error);
+        if (error.code == -1001) {
+            [KVNProgress showErrorWithStatus:@"网络不给力"];
+        } else {
+            [KVNProgress showErrorWithStatus:@"服务器开小差了"];
+        }
+        [self handlerWithLyric:@""];
+    }];
+}
+
+- (void)handlerWithLyric:(NSString *)lyric {
+    self.lyricFrameModel.lyric = [lyric stringByReplacingOccurrencesOfString:@"-" withString:@"～"];
+    self.curretnLyric = [self.lyricFrameModel.lyricStrArray firstObject];
+    [self requestMidiData];
+    [self.lyricsView setText: self.curretnLyric];
+    [self changeLyricColor];
+    /**
+     *  刷新歌词所在区
+     */
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:3];
+    [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self getCommentsData];
 }
 
 #pragma mark - ***************获取礼物信息***************
